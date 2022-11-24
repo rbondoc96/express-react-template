@@ -1,22 +1,29 @@
 {
-  "name": "vite-ts-react-express-boilerplate",
-  "version": "1.0.0",
-  "description": "Boilerplate for a full-stack TypeScript project using Vite+React and Express",
-  "license": "MIT",
-  "author": "Rodrigo Bondoc",
-  "keywords": [],
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "scripts": {
-    "client:dev": "npm -w packages/client run dev",
-    "client:i": "npm -w packages/client i",
-    "server:i": "npm -w packages/server i",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "workspaces": [
-    "packages/client",
-    "packages/server"
-  ]
+    "name": "vite-ts-react-express-boilerplate",
+    "version": "1.0.0",
+    "description": "Boilerplate for a full-stack TypeScript project using Vite, React, TailwindCSS, and Express",
+    "license": "MIT",
+    "author": "Rodrigo Bondoc",
+    "keywords": [
+        "vite",
+        "react",
+        "tailwindcss",
+        "express",
+        "boilerplate"
+    ],
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "client": "npm -w packages/client",
+        "client:run": "npm -w packages/client run",
+        "server": "npm -w packages/server",
+        "server:run": "npm -w packages/server run",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "workspaces": [
+        "packages/client",
+        "packages/server"
+    ]
 }
