@@ -1,0 +1,10 @@
+# Project directories
+node_modules/
+dist/
+build/
+
+# Code Style configs
+.eslintrc.json
+
+# Declaration files
+env.d.ts

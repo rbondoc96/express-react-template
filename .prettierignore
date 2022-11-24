@@ -1,0 +1,22 @@
+# Configs
+.prettierrc.json
+.eslintrc.json
+.vscode
+jest.config.js
+
+# Output files
+build
+dist
+
+# Code coverage
+coverage
+
+# Frontend files
+public
+
+# Dependencies
+node_modules
+
+# Miscellaneous
+docs
+*.md
