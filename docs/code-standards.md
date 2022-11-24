@@ -2,6 +2,8 @@
 
 ## Table of Contents
 - [Language-Independent Standards](#lang-independent)
+- [Monorepo Standards](#monorepo-standards)
+    - [Adding a New Sub-Project](#monorepo-standards-add-sub-project)
 - [HTML](#html)
     - [Indentation](#html-indentation)
     - [Multi-line Attributes](#html-attributes)
@@ -21,6 +23,31 @@
         - [Folder Structure](#jsts-react-folder-structure)
             - [Components](#jsts-react-folder-structure-components)
         - [Hooks](#jsts-react-hook)
+
+## Monorepo Standards <a name="monorepo-standards"></a>
+
+### Adding a New Sub-Project <a name="monorepo-standards-add-sub-project"></a>
+
+To reduce clutter in the root project directory, isolated sub-projects are collected in the `packages` directory.
+
+When a new sub-project is added, create these scripts in `package.json`:
+```json5
+// sub-project is called foobar
+{
+    // ...
+    "scripts": {
+        // ..
+        "foobar": "npm -w packages/foobar",
+        "foobar:run": "npm -w packages/foobar run",
+    }
+    // ...
+}
+```
+That way, we don't have to specify the `-w` flag each time we want to run an `npm` command in a particular package. Here are a couple examples:
+```
+npm run foobar i axios          # Run `npm install` in `packages/foobar`
+npm run foobar:run dev          # Run `npm run dev` in `packages/foobar`
+```
 
 
 ## Language-Independent Standards <a name="lang-independent"></a>
