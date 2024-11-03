@@ -1,0 +1,23 @@
+{
+    "include": ["src"],
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./src/*"],
+            "@common/*": ["../common/src/*"]
+        },
+
+        // General
+        "target": "ES2020",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+
+        // Build
+        "outDir": "./dist"
+    },
+    "tsc-alias": {
+        // Appends a .js extension to imports after building so that Node correctly loads the files as ES modules
+        "resolveFullPaths": true
+    }
+}

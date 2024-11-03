@@ -1,14 +1,21 @@
-import {defineConfig} from 'vite';
-import react from '@vitejs/plugin-react';
-import {resolve} from 'path';
+import { resolve } from 'node:path';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react-swc';
+import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      '@mocks': resolve(__dirname, 'mocks'),
+    plugins: [react(), tailwindcss()],
+    resolve: {
+        alias: {
+            '@': resolve(__dirname, 'src'),
+            '@common': resolve(__dirname, '..', 'common', 'src'),
+        },
     },
-  },
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://127.0.0.1:8000',
+            },
+        },
+    },
 });

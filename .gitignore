@@ -1,3 +1,18 @@
+# Build artifacts
+build
+dist
+packages/server/public
+
+# Dependencies
+node_modules
+
+# Environment
+.env
+.env.test
+
+# IDEs
+.idea
+
 # Logs
 logs
 *.log
@@ -7,14 +22,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Build
-**/build/*
-**/dist/*
-
-# Dependencies
-package-lock.json
-**/node_modules/*
-
-# General
+# OS
 .DS_Store
-.env
+
+# Secrets
+*.pem

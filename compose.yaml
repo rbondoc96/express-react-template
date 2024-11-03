@@ -1,0 +1,21 @@
+services:
+  template-db:
+    container_name: ert_db
+    image: postgres:17
+    ports:
+      - '8001:5432'
+    environment:
+      - POSTGRES_USER=postgres_user
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_DB=ert
+
+  template-mail:
+    image: axllent/mailpit:latest
+    container_name: ert_mail
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1

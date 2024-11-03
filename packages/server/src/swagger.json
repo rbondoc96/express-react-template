@@ -1,0 +1,67 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Express React Template API",
+        "description": "A template project for projects using Express and React",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth": {
+            "get": {
+                "summary": "Information on the currently authenticated user.",
+                "description": "Returns data related to the currently authenticated user.",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "The user is not authenticated."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Log out",
+                "description": "Logs out the currently authenticated user.",
+                "responses": {
+                    "204": {
+                        "description": "Successful logout."
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "summary": "Login",
+                "description": "Authenticates the user and sets a JWT as an HTTP-only cookie.",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Successful login"
+                    },
+                    "400": {
+                        "description": "Invalid credentials were provided"
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "summary": "Register",
+                "description": "Sign up for a new account",
+                "produces": ["application/json"],
+                "responses": {
+                    "201": {
+                        "description": "Successful registration"
+                    },
+                    "400": {
+                        "description": "A user with the requested username already exists"
+                    },
+                    "422": {
+                        "description": "The registration data provided was not valid."
+                    }
+                }
+            }
+        }
+    }
+}

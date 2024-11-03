@@ -1,29 +1,49 @@
 {
-    "name": "vite-ts-react-express-boilerplate",
+    "name": "express-react-template",
+    "type": "module",
+    "private": true,
     "version": "1.0.0",
-    "description": "Boilerplate for a full-stack TypeScript project using Vite, React, TailwindCSS, and Express",
     "license": "MIT",
     "author": "Rodrigo Bondoc",
-    "keywords": [
-        "vite",
-        "react",
-        "tailwindcss",
-        "express",
-        "boilerplate"
-    ],
-    "main": "index.js",
-    "directories": {
-        "doc": "docs"
-    },
+    "description": "Boilerplate for a full-stack TypeScript project using Vite, React, TailwindCSS, and Express",
+    "keywords": [],
     "scripts": {
-        "client": "npm -w packages/client",
-        "client:run": "npm -w packages/client run",
-        "server": "npm -w packages/server",
-        "server:run": "npm -w packages/server run",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "client:build": "npm -w packages/client run build",
+        "client:deploy": "npm -w packages/client run deploy",
+        "client:dev": "npm -w packages/client run dev",
+        "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\" -c red,green",
+        "format": "prettier \"**/*.{ts,tsx}\" --check",
+        "format:fix": "prettier \"**/*.{ts,tsx}\" --write",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "server:build": "npm -w packages/server run build",
+        "server:deploy": "./scripts/generate-rsa-keys.sh && npm -w packages/server run deploy && npm -w packages/server run migrate:up",
+        "server:dev": "npm -w packages/server run dev",
+        "server:start": "npm -w packages/server start",
+        "server:test": "npm -w packages/server run test"
     },
     "workspaces": [
         "packages/client",
+        "packages/common",
         "packages/server"
-    ]
+    ],
+    "devDependencies": {
+        "@eslint/js": "^9.13.0",
+        "@types/eslint__js": "^8.42.3",
+        "@types/node": "^22.7.7",
+        "concurrently": "^9.0.1",
+        "eslint": "^9.13.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-jsx-a11y": "^6.10.0",
+        "eslint-plugin-react": "^7.37.1",
+        "eslint-plugin-react-hooks": "^5.0.0",
+        "eslint-plugin-react-refresh": "^0.4.13",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "globals": "^15.9.0",
+        "prettier": "^3.3.3",
+        "typescript": "^5.6.3",
+        "typescript-eslint": "^8.11.0",
+        "vite": "^5.4.10",
+        "vitest": "^2.1.4"
+    }
 }
