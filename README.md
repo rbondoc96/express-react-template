@@ -1,11 +1,9 @@
-# Full Stack TypeScript Boilerplate
+# Express React Template
 
-## Table of Contents
-- [Features](#features)
-    - [Technologies Used in `client`](#tech-client)
-    - [Technologies Used in `server`](#tech-server)
-- [Getting Started](#getting-started)
-
+## Environments
+* `main`
+    * Frontend: [`https://gleaming-figolla-6c5720.netlify.app/`](https://gleaming-figolla-6c5720.netlify.app/)
+    * API URL: `https://express-react-template-ms0u.onrender.com`
 
 ## Features <a name="features"></a>
 This monorepo acts as boilerplate for a full stack project written using TypeScript. 
@@ -42,3 +40,30 @@ After the dependencies are installed, the dev servers can be started using:
 npm run client:run dev      # starts the frontend dev server
 npm run server:run dev      # starts the backend dev server
 ```
+
+## Common Commands
+
+### Project Root
+* `npm run client:<name>` - Runs the `<name>` script defined in `packages/client`
+* `npm run format` - Runs Prettier code style checks
+* `npm run server:<name>` - Runs the `<name>` script defined in `packages/server`
+
+### Client
+* `npm run build` - Build frontend for production
+* `npm run checks` - Runs type, linting, and formatting checks concurrently
+* `npm run deploy` - Used by Netlify to build and deploy the frontend
+* `npm run dev` - Run the frontend in DEV mode
+* `npm run format` - Runs Prettier code style checks
+* `npm run lint` - Runs ESLint checks
+* `npm run stan` - Runs the TypeScript compiler as a type checker
+* `npm test` - Run tests
+
+### Server
+* `npm run build` - Build backend for production
+* `npm run checks` - Runs type, linting, and formatting checks concurrently
+* `npm run deploy` - Used by Render to build and deploy the backend
+* `npm run dev` - Run the backend in DEV mode
+* `npm run format` - Runs Prettier code style checks
+* `npm run lint` - Runs ESLint checks
+* `npm run stan` - Runs the TypeScript compiler as a type checker
+* `npm test` - Run tests

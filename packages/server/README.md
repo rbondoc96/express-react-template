@@ -1,8 +1,4 @@
-# Server 
-
-## Table of Contents
-- [Working Dependencies](#working-dependencies)
-- [Development Dependencies](#dev-dependencies)
+# Express Server
 
 ## Working Dependencies <a name="working-dependencies"></a>
 - [`dotenv`](https://www.npmjs.com/package/dotenv): Loads environment variables from a `.env` file into `process.env`
