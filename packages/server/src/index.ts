@@ -8,7 +8,7 @@ import { env } from '@/utilities/env';
 const path = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = env.SERVER_PORT;
+const port = env.PORT;
 
 app.use(cors());
 

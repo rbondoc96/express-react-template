@@ -4,7 +4,7 @@ import { coerce, object } from 'zod';
 config();
 
 const envParser = object({
-    SERVER_PORT: coerce.number(),
+    PORT: coerce.number().default(8000),
 });
 
 export const env = envParser.parse(process.env);
