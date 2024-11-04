@@ -1,23 +1,17 @@
 {
-    "name": "vite-ts-react-express-boilerplate",
+    "name": "express-react-template",
+    "private": true,
     "version": "1.0.0",
-    "description": "Boilerplate for a full-stack TypeScript project using Vite, React, TailwindCSS, and Express",
     "license": "MIT",
     "author": "Rodrigo Bondoc",
-    "keywords": [
-        "vite",
-        "react",
-        "tailwindcss",
-        "express",
-        "boilerplate"
-    ],
-    "main": "index.js",
-    "directories": {
-        "doc": "docs"
-    },
+    "description": "Boilerplate for a full-stack TypeScript project using Vite, React, TailwindCSS, and Express",
+    "keywords": [],
     "scripts": {
         "client": "npm -w packages/client",
+        "client:dev": "npm -w packages/client run dev",
         "client:run": "npm -w packages/client run",
+        "format": "prettier \"**/*.{ts,tsx}\" --check",
+        "format:fix": "prettier \"src/**/*.{ts,tsx}\" --write",
         "server": "npm -w packages/server",
         "server:run": "npm -w packages/server run",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,5 +19,22 @@
     "workspaces": [
         "packages/client",
         "packages/server"
-    ]
+    ],
+    "devDependencies": {
+        "@eslint/js": "^9.13.0",
+        "@types/eslint__js": "^8.42.3",
+        "@types/node": "^22.7.7",
+        "concurrently": "^9.0.1",
+        "eslint": "^9.13.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-jsx-a11y": "^6.10.0",
+        "eslint-plugin-react": "^7.37.1",
+        "eslint-plugin-react-hooks": "^5.0.0",
+        "eslint-plugin-react-refresh": "^0.4.13",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "globals": "^15.9.0",
+        "prettier": "^3.3.3",
+        "typescript": "^5.6.3",
+        "typescript-eslint": "^8.11.0"
+    }
 }
