@@ -10,6 +10,7 @@
     "scripts": {
         "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
         "checks": "concurrently \"npm run stan\" \"npm run lint\" \"npm run format\" -n stan,lint,format -c red,green,blue",
+        "deploy": "npm ci && npm run build",
         "dev": "tsx --watch ./src/index.ts",
         "format": "prettier \"**/*.ts\" --check",
         "format:fix": "prettier \"src/**/*.ts\" --write",

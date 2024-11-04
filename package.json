@@ -16,6 +16,7 @@
         "format": "prettier \"**/*.{ts,tsx}\" --check",
         "format:fix": "prettier \"src/**/*.{ts,tsx}\" --write",
         "server:build": "npm -w packages/server run build",
+        "server:deploy": "npm -w packages/server run deploy",
         "server:dev": "npm -w packages/server run dev",
         "server:start": "npm -w packages/server start"
     },
