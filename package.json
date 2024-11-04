@@ -1,5 +1,6 @@
 {
     "name": "express-react-template",
+    "type": "module",
     "private": true,
     "version": "1.0.0",
     "license": "MIT",
@@ -17,7 +18,8 @@
         "format:fix": "prettier \"src/**/*.{ts,tsx}\" --write",
         "server:build": "npm -w packages/server run build",
         "server:dev": "npm -w packages/server run dev",
-        "server:start": "npm -w packages/server start"
+        "server:start": "npm -w packages/server start",
+        "start": "node dist/index.js"
     },
     "workspaces": [
         "packages/client",
