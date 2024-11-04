@@ -7,11 +7,16 @@
     "description": "Boilerplate for a full-stack TypeScript project using Vite, React, TailwindCSS, and Express",
     "keywords": [],
     "scripts": {
+        "build": "concurrently \"npm run client:build\" \"npm run server:build\"",
+        "build:preview": "npm run build && npm run server:start",
+        "client:build": "npm -w packages/client run build",
         "client:dev": "npm -w packages/client run dev",
         "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\" -c red,green",
         "format": "prettier \"**/*.{ts,tsx}\" --check",
         "format:fix": "prettier \"src/**/*.{ts,tsx}\" --write",
-        "server:dev": "npm -w packages/server run dev"
+        "server:build": "npm -w packages/server run build",
+        "server:dev": "npm -w packages/server run dev",
+        "server:start": "npm -w packages/server start"
     },
     "workspaces": [
         "packages/client",
