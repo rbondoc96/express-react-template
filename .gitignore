@@ -1,6 +1,7 @@
 # Build artifacts
 build
 dist
+packages/server/public
 
 # Dependencies
 node_modules

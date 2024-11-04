@@ -1,6 +1,6 @@
 {
     "extends": "../../tsconfig.base.json",
-    "references": [{"path": "./tsconfig.node.json"}],
+    "references": [{ "path": "./tsconfig.node.json" }],
     "include": ["__tests__", "src", "tailwind.config.ts"],
     "compilerOptions": {
         // Project Environment
@@ -11,9 +11,6 @@
         },
 
         // General
-        "moduleResolution": "Bundler",
-
-        // Build
-        "outDir": "build",
+        "moduleResolution": "Bundler"
     }
 }
