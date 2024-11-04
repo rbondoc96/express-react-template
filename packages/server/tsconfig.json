@@ -13,9 +13,6 @@
         // General
         "target": "ES2020",
         "module": "ESNext",
-        "moduleResolution": "Node",
-
-        // Build
-        "outDir": "dist"
+        "moduleResolution": "Node"
     }
 }
