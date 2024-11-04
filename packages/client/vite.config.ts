@@ -1,12 +1,8 @@
-import { join, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-    build: {
-        emptyOutDir: true,
-        outDir: join(__dirname, '..', 'server', 'dist', 'public'),
-    },
     plugins: [react()],
     resolve: {
         alias: {
