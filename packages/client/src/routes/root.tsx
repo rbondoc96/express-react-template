@@ -1,16 +1,17 @@
 import { type ReactNode, useEffect, useState } from 'react';
+import { client } from '@/api/client';
 
 export function Root(): ReactNode {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
         async function getMessage() {
-            const response = await fetch('/api/hello');
-            const data = await response.json();
+            const api = client();
+            const data: { message: string } = await api.get('api/hello').json();
 
             console.log(data);
 
-            setMessage(data?.message);
+            setMessage(data.message);
         }
 
         void getMessage().catch(() => console.log('error in server'));
