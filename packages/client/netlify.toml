@@ -2,5 +2,5 @@
 # Only deploy if changes are made to the client directory
 ignore = "git diff --quiet $COMMIT_REF $CACHED_COMMIT_REF -- packages/client"
 
-publish = "public/client/dist"
+publish = "packages/client/dist"
 command = "npm run client:deploy"
