@@ -1,7 +1,13 @@
+import cors from 'cors';
 import express from 'express';
+import { apiRouter } from '@/routes/api';
+import { env } from '@/utilities/env';
 
 const app = express();
-const port = 9999;
+const port = env.SERVER_PORT;
+
+app.use(cors());
+app.use('/api', apiRouter);
 
 app.get('/', (_req, res) => {
     res.send('Express + TypeScript server');

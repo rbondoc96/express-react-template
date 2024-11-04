@@ -9,7 +9,7 @@
     "keywords": [],
     "scripts": {
         "checks": "concurrently \"npm run stan\" \"npm run lint\" \"npm run format\" -n stan,lint,format -c red,green,blue",
-        "dev": "tsx ./src/index.ts",
+        "dev": "tsx --watch ./src/index.ts",
         "format": "prettier \"**/*.ts\" --check",
         "format:fix": "prettier \"src/**/*.ts\" --write",
         "lint": "eslint .",
@@ -19,10 +19,13 @@
         "test": "vitest --run"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "dotenv": "^16.4.5",
-        "express": "^5.0.1"
+        "express": "^5.0.1",
+        "zod": "^3.23.8"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.17",
         "@types/express": "^5.0.0",
         "tsx": "^4.19.2"
     }
