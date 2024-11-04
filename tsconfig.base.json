@@ -18,10 +18,10 @@
 
         // Linting
         "allowJs": false,
+        "allowUnreachableCode": false,
         "forceConsistentCasingInFileNames": true,
         "useDefineForClassFields": true,
         "strict": true,
-        "strictNullChecks": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,

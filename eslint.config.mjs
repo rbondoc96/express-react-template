@@ -93,8 +93,8 @@ const config = [
     {
         name: 'node/esm',
         files: [
+            '**/vitest.config.ts',
             'packages/client/vite.config.ts',
-            'packages/client/vitest.config.ts',
             'packages/server/**/*.mts',
             'packages/server/**/*.ts',
             'scripts/**/*.mts',

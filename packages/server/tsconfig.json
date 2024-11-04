@@ -1,36 +1,21 @@
 {
-    "include": ["mocks", "test", "src"],
-    "exclude": ["dist", "node_modules"],
+    "extends": "../../tsconfig.base.json",
+    "include": ["__mocks__", "__tests__", "src"],
     "compilerOptions": {
-        "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "baseUrl": ".",
-        "outDir": "dist",
+        // Project Environment
+        "lib": ["ES2020"],
         "paths": {
             "@/*": ["./src/*"],
-            "@mocks/*": ["./mocks/*"]
+            "@mocks/*": ["./__mocks__/*"]
         },
-        "allowJs": false,
-        "strict": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "isolatedModules": false,
-        "forceConsistentCasingInFileNames": true,
-        "resolveJsonModule": true,
-        "removeComments": true,
+        "sourceMap": true,
 
-        /* Type Checking */
-        "alwaysStrict": true,
-        "allowUnreachableCode": false,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": false,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "strictBindCallApply": true,
-        "strictPropertyInitialization": true,
-        "useUnknownInCatchVariables": true
+        // General
+        "target": "ES2020",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+
+        // Build
+        "outDir": "dist"
     }
 }
