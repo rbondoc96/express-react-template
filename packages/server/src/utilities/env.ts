@@ -1,9 +1,10 @@
 import { config } from 'dotenv';
-import { coerce, object } from 'zod';
+import { coerce, object, string } from 'zod';
 
 config();
 
 const envParser = object({
+    ALLOWED_ORIGIN: string(),
     PORT: coerce.number().default(8000),
 });
 

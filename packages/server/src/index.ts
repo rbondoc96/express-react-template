@@ -6,7 +6,11 @@ import { env } from '@/utilities/env';
 const app = express();
 const port = env.PORT;
 
-app.use(cors());
+app.use(
+    cors({
+        origin: env.ALLOWED_ORIGIN,
+    }),
+);
 
 app.use('/api', apiRouter);
 
