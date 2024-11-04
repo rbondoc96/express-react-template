@@ -9,6 +9,7 @@
     "keywords": [],
     "scripts": {
         "client:build": "npm -w packages/client run build",
+        "client:deploy": "npm -w packages/client run deploy",
         "client:dev": "npm -w packages/client run dev",
         "deploy": "npm ci && npm run build && cp -R ./packages/server/dist dist",
         "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\" -c red,green",
