@@ -8,6 +8,7 @@
     "keywords": [],
     "scripts": {
         "client:dev": "npm -w packages/client run dev",
+        "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\" -c red,green",
         "format": "prettier \"**/*.{ts,tsx}\" --check",
         "format:fix": "prettier \"src/**/*.{ts,tsx}\" --write",
         "server:dev": "npm -w packages/server run dev"
