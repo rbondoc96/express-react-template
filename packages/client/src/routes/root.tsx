@@ -18,14 +18,16 @@ export function Root(): ReactNode {
     }, []);
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col gap-4">
             <div className="flex flex-col items-center">
-                <h1 className="text-4xl font-semibold">React Template</h1>
+                <h1 className="text-4xl font-semibold">Express + React Template</h1>
             </div>
-            <p className="flex gap-2">
-                <span>From Server: </span>
-                <span>{message}</span>
-            </p>
+            <div className="flex justify-center">
+                <div className="border px-4 py-3 rounded">
+                    <span>From Server: </span>
+                    <code className="bg-gray-200 px-2 py-1 rounded">{message}</code>
+                </div>
+            </div>
         </div>
     );
 }
