@@ -11,6 +11,7 @@
         "build:preview": "npm run build && npm run server:start",
         "client:build": "npm -w packages/client run build",
         "client:dev": "npm -w packages/client run dev",
+        "deploy": "npm ci && npm run build && cp -R ./packages/server/dist dist",
         "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\" -c red,green",
         "format": "prettier \"**/*.{ts,tsx}\" --check",
         "format:fix": "prettier \"src/**/*.{ts,tsx}\" --write",
