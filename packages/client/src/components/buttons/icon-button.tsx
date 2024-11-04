@@ -34,8 +34,8 @@ const styles = cva(
 
 type IconButtonProps = VariantProps<typeof styles> &
     BaseButtonProps & {
-    asChild?: boolean;
-};
+        asChild?: boolean;
+    };
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     ({ asChild = false, className, children, size, theme, ...props }, ref) => {

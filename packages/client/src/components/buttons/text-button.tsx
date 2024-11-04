@@ -25,8 +25,8 @@ const styles = cva(['rounded-md', 'outline-0', 'hover:decoration-1 hover:underli
 
 type TextButtonProps = VariantProps<typeof styles> &
     BaseButtonProps & {
-    asChild?: boolean;
-};
+        asChild?: boolean;
+    };
 
 export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
     ({ asChild = false, children, className, size, theme, ...props }, ref) => {
