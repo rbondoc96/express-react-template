@@ -13,6 +13,11 @@ app.use(
     }),
 );
 
+// Parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false }));
+// Parse application/json
+app.use(express.json());
+
 app.use('/api', apiRouter);
 
 app.use(errorMiddleware);
