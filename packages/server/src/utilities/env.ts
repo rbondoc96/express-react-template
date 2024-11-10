@@ -5,6 +5,11 @@ config();
 
 const envParser = object({
     ALLOWED_ORIGIN: string(),
+    DB_DATABASE: string(),
+    DB_HOST: string(),
+    DB_PASSWORD: string(),
+    DB_PORT: coerce.number(),
+    DB_USER: string(),
     PORT: coerce.number().default(8000),
 });
 

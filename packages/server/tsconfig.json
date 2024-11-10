@@ -1,6 +1,6 @@
 {
     "extends": "../../tsconfig.base.json",
-    "include": ["__mocks__", "__tests__", "src"],
+    "include": ["__mocks__", "__tests__", "kysely", "kysely.config.ts", "src"],
     "compilerOptions": {
         // Project Environment
         "lib": ["ES2020"],
