@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import { errorMiddleware } from '@/http/middlewares/error-middleware';
 import { apiRouter } from '@/routes/api';
 import { env } from '@/utilities/env';
 
@@ -13,6 +14,8 @@ app.use(
 );
 
 app.use('/api', apiRouter);
+
+app.use(errorMiddleware);
 
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
