@@ -1,12 +1,15 @@
 import { type ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Link } from '@/components/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 export function RootLayout(): ReactNode {
     return (
         <div className="container flex flex-col justify-between px-8">
             <header className="my-6">
-                <div className="flex justify-end">
+                <div className="flex justify-between">
+                    <Link to="/">Home</Link>
+
                     <ThemeToggle />
                 </div>
             </header>

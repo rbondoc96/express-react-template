@@ -10,4 +10,5 @@ function Route<P extends string>(name: symbol, path: P): RouteName<P> {
     };
 }
 
+export const ROUTE_REGISTER = Route(Symbol('register'), '/register');
 export const ROUTE_ROOT = Route(Symbol('root'), '/');
