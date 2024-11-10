@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { coerce, object, string } from 'zod';
 import { userCount, userCreate, userSelectQuery } from '@/database/repositories/user-repository';
+import { VerifyEmail } from '@/email/verify-email';
 import { ValidationException } from '@/exceptions/validation-exception';
 import { UserResource } from '@/http/resources/user-resource';
 
@@ -44,6 +45,8 @@ authController.post('/register', async (req, res, next) => {
     });
 
     const responseData = new UserResource(user).base().create();
+
+    await new VerifyEmail(user).send();
 
     res.status(201).json(responseData);
 });

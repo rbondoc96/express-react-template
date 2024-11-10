@@ -10,6 +10,9 @@ const envParser = object({
     DB_PASSWORD: string(),
     DB_PORT: coerce.number(),
     DB_USER: string(),
+    MAIL_FROM_ADDRESS: string(),
+    MAIL_HOST: string(),
+    MAIL_PORT: coerce.number(),
     PORT: coerce.number().default(8000),
 });
 

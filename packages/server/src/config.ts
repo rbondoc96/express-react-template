@@ -8,4 +8,9 @@ export const config = {
         port: env.DB_PORT,
         user: env.DB_USER,
     },
+    mail: {
+        from_address: env.MAIL_FROM_ADDRESS,
+        host: env.MAIL_HOST,
+        port: env.MAIL_PORT,
+    },
 } as const;
