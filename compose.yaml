@@ -1,0 +1,10 @@
+services:
+  template-db:
+    container_name: ert_db
+    image: postgres:17
+    ports:
+      - '8001:5432'
+    environment:
+      - POSTGRES_USER=postgres_user
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_DB=ert
