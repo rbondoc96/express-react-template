@@ -41,10 +41,9 @@ export const authController = Router();
 
 authController.post('/register', async (req, res, next) => {
     const result = registerPayload.safeParse(req.body);
-    req.query;
 
     if (result.error) {
-        next(new ValidationException(result.error));
+        next(ValidationException.fromZodError(result.error));
         return;
     }
 

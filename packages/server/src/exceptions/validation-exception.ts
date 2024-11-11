@@ -4,15 +4,16 @@ import { HttpException } from '@/exceptions/http-exception';
 export class ValidationException extends HttpException {
     public readonly name = 'ValidationException';
 
-    constructor(private readonly error: ZodError) {
+    constructor(public readonly messages: Record<string, string>) {
         super();
     }
 
-    public override getMessages() {
-        const issues = this.error.errors;
+    public static fromZodError(error: ZodError) {
+        const issues = error.errors;
 
-        return issues.reduce(
+        const errors = issues.reduce(
             (acc, issue) => {
+                // Zod schemas are expected to have a single depth.
                 const path = String(issue.path[0]);
                 const message = issue.message;
 
@@ -21,8 +22,14 @@ export class ValidationException extends HttpException {
                     [path]: message,
                 };
             },
-            {} as Record<string, unknown>,
+            {} as Record<string, string>,
         );
+
+        return new ValidationException(errors);
+    }
+
+    public override getMessages() {
+        return this.messages;
     }
 
     public override getStatusCode() {
