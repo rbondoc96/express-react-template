@@ -6,7 +6,7 @@ export abstract class Email {
     protected abstract subject(): string;
     protected abstract toAddress(): string;
 
-    protected htmlBody(): string | undefined {
+    protected async htmlBody(): Promise<string | undefined> {
         return undefined;
     }
 
@@ -14,17 +14,19 @@ export abstract class Email {
         return undefined;
     }
 
-    protected options(): SendMailOptions {
+    protected async options(): Promise<SendMailOptions> {
+        const html = await this.htmlBody();
+
         return {
             subject: this.subject(),
             from: config.mail.from_address,
-            html: this.htmlBody(),
+            html,
             text: this.textBody(),
             to: this.toAddress(),
         };
     }
 
     public async send(): Promise<SentMessageInfo> {
-        return await mailer.sendMail(this.options());
+        return await mailer.sendMail(await this.options());
     }
 }
