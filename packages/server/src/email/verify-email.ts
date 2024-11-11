@@ -1,4 +1,5 @@
 import ejs from 'ejs';
+import { config } from '@/config';
 import { UserSelect } from '@/database/repositories/user-repository';
 import { Email } from '@/email/email';
 import { template } from '@/utilities/template';
@@ -17,6 +18,9 @@ export class VerifyEmail extends Email {
     }
 
     protected override async htmlBody(): Promise<string> {
-        return await ejs.renderFile(template['verify-email'], { user: this.user });
+        return await ejs.renderFile(template['verify-email'], {
+            user: this.user,
+            verifyUrl: `${config.app.url}/api/auth/verify-email?id=${this.user.ulid}`,
+        });
     }
 }

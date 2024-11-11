@@ -10,6 +10,7 @@ export type UserTable = {
     first_name: string;
     last_name: string;
     password: string;
+    email_verified_at: ColumnType<Date, never, string>;
     created_at: ColumnType<Date, never, never>;
     updated_at: ColumnType<Date, never, string>;
 };
@@ -43,6 +44,14 @@ export async function userCreate(data: UserCreate): Promise<UserSelect> {
     return await db.insertInto('users').values(user).returningAll().executeTakeFirstOrThrow();
 }
 
+export async function userFindByUlid(ulid: string): Promise<UserSelect> {
+    return userSelectQuery().selectAll().where('ulid', '=', ulid).executeTakeFirstOrThrow();
+}
+
 export function userSelectQuery() {
     return db.selectFrom('users');
+}
+
+export async function userUpdate(user: UserSelect, data: UserUpdate) {
+    return db.updateTable('users').set(data).where('ulid', '=', user.ulid).executeTakeFirstOrThrow();
 }

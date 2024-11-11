@@ -5,6 +5,8 @@ config();
 
 const envParser = object({
     ALLOWED_ORIGIN: string(),
+    APP_URL: string(),
+    CLIENT_URL: string(),
     DB_DATABASE: string(),
     DB_HOST: string(),
     DB_PASSWORD: string(),

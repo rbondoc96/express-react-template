@@ -6,6 +6,8 @@
 
 /** @type {UserSelect} */
 const user = locals.user;
+/** @type {string */
+const verifyUrl = locals.verifyUrl;
 %>
 
 
@@ -201,7 +203,7 @@ const user = locals.user;
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center">
-                                                                        <a class="button button-primary" href="http://localhost:5173" target="_blank" rel="noopener">
+                                                                        <a class="button button-primary" href="<%= verifyUrl %>" target="_blank" rel="noopener">
                                                                             Verify Email Address
                                                                         </a>
                                                                     </td>
@@ -223,8 +225,8 @@ const user = locals.user;
                                                                         <p>
                                                                             If you're having trouble clicking the "Verify Email Address" button, copy and paste the URL below into your web browser:
                                                                             <span class="fallback-link">
-                                                                                <a href="http://localhost:5173" target="_blank" rel="noopener">
-                                                                                    http://localhost:5173
+                                                                                <a href="<%= verifyUrl %>" target="_blank" rel="noopener">
+                                                                                    <%= verifyUrl %>
                                                                                 </a>
                                                                             </span>
                                                                         </p>
