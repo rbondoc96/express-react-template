@@ -38,10 +38,10 @@ authController.post('/register', async (req, res, next) => {
 
     const data = result.data;
     const user = await userCreate({
-        email: data.email,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        password: data.password,
+        email: data.email.trim(),
+        first_name: data.first_name.trim(),
+        last_name: data.last_name.trim(),
+        password: data.password.trim(),
     });
 
     const responseData = new UserResource(user).base().create();
