@@ -25,11 +25,9 @@
         "bcryptjs": "^2.4.3",
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
-        "ejs": "^3.1.10",
         "express": "^5.0.1",
         "kysely": "^0.27.4",
         "luxon": "^3.5.0",
-        "nodemailer": "^6.9.16",
         "pg": "^8.13.1",
         "ulid": "^2.3.0",
         "zod": "^3.23.8"
@@ -37,10 +35,8 @@
     "devDependencies": {
         "@types/bcryptjs": "^2.4.6",
         "@types/cors": "^2.8.17",
-        "@types/ejs": "^3.1.5",
         "@types/express": "^5.0.0",
         "@types/luxon": "^3.4.2",
-        "@types/nodemailer": "^6.4.16",
         "@types/pg": "^8.11.10",
         "kysely-ctl": "^0.9.0",
         "tsc-alias": "^1.8.10",

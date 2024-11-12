@@ -1,21 +1,8 @@
 import { Router } from 'express';
-import { DateTime } from 'luxon';
 import { coerce, object, string } from 'zod';
-import { config } from '@/config';
-import {
-    userCount,
-    userCreate,
-    userFindByUlid,
-    userSelectQuery,
-    userUpdate,
-} from '@/database/repositories/user-repository';
-import { VerifyEmail } from '@/email/verify-email';
+import { userCount, userCreate, userSelectQuery } from '@/database/repositories/user-repository';
 import { ValidationException } from '@/exceptions/validation-exception';
 import { UserResource } from '@/http/resources/user-resource';
-
-const verifyEmailQueryParams = object({
-    id: string(),
-});
 
 const paginationQueryParams = object({
     page: coerce.number().default(1),
@@ -57,26 +44,7 @@ authController.post('/register', async (req, res, next) => {
 
     const responseData = new UserResource(user).base().create();
 
-    await new VerifyEmail(user).send();
-
     res.status(201).json(responseData);
-});
-
-authController.get('/verify-email', async (req, res, next) => {
-    const result = verifyEmailQueryParams.safeParse(req.query);
-
-    if (result.error) {
-        next(new Error('Invalid URL.'));
-        return;
-    }
-
-    const query = result.data;
-    const user = await userFindByUlid(query.id);
-    await userUpdate(user, {
-        email_verified_at: DateTime.now().toUTC().toISO(),
-    });
-
-    res.redirect(config.app.client_url);
 });
 
 authController.get('/users', async (req, res, next) => {
