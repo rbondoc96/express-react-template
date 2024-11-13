@@ -44,7 +44,19 @@ export async function userCreate(data: UserCreate): Promise<UserSelect> {
     return await db.insertInto('users').values(user).returningAll().executeTakeFirstOrThrow();
 }
 
-export async function userFindByUlid(ulid: string): Promise<UserSelect> {
+export async function userFindByEmail(email: string): Promise<UserSelect | undefined> {
+    return userSelectQuery().selectAll().where('email', '=', email).executeTakeFirst();
+}
+
+export async function userFindByEmailOrThrow(email: string): Promise<UserSelect> {
+    return userSelectQuery().selectAll().where('email', '=', email).executeTakeFirstOrThrow();
+}
+
+export async function userFindByUlid(ulid: string): Promise<UserSelect | undefined> {
+    return userSelectQuery().selectAll().where('ulid', '=', ulid).executeTakeFirst();
+}
+
+export async function userFindByUlidOrThrow(ulid: string): Promise<UserSelect> {
     return userSelectQuery().selectAll().where('ulid', '=', ulid).executeTakeFirstOrThrow();
 }
 

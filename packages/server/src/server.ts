@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import { errorMiddleware } from '@/http/middlewares/error-middleware';
@@ -10,6 +11,7 @@ const port = env.PORT;
 app.use(
     cors({
         origin: env.ALLOWED_ORIGIN,
+        credentials: true,
     }),
 );
 
@@ -17,6 +19,8 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 // Parse application/json
 app.use(express.json());
+// Parse cookies in request headers
+app.use(cookieParser());
 
 app.use('/api', apiRouter);
 

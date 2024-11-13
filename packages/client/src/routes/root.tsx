@@ -31,6 +31,9 @@ export function Root(): ReactNode {
             <Link to="/register" variant="solid-button">
                 Sign Up
             </Link>
+            <Link to="/login" variant="solid-button">
+                Login
+            </Link>
             <SolidButton onClick={getUsers}>Get Users</SolidButton>
         </div>
     );
