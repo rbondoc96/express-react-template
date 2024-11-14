@@ -1,11 +1,13 @@
 import bcrypt from 'bcryptjs';
 import { Router } from 'express';
+import { DateTime } from 'luxon';
 import { coerce, object, string } from 'zod';
 import {
     userCount,
     userCreate,
-    userFindByEmailOrThrow,
+    userFindByUsernameOrThrow,
     userSelectQuery,
+    userUpdate,
 } from '@/database/repositories/user-repository';
 import { BadRequestException } from '@/exceptions/bad-request-exception';
 import { ValidationException } from '@/exceptions/validation-exception';
@@ -19,8 +21,8 @@ const paginationQueryParams = object({
 });
 
 const loginPayload = object({
-    email: string().email({
-        message: 'A valid email is required.',
+    username: string().min(1, {
+        message: 'The username field is required.',
     }),
     password: string().min(1, {
         message: 'The password field is required.',
@@ -28,8 +30,8 @@ const loginPayload = object({
 });
 
 const registerPayload = object({
-    email: string().email({
-        message: 'A valid email is required.',
+    username: string().min(1, {
+        message: 'The username field is required.',
     }),
     first_name: string().min(1, {
         message: 'The first name field is required.',
@@ -73,7 +75,7 @@ authController.post('/login', async (req, res, next) => {
     }
 
     const data = result.data;
-    const user = await userFindByEmailOrThrow(data.email);
+    const user = await userFindByUsernameOrThrow(data.username);
 
     const match = await bcrypt.compare(data.password, user.password);
 
@@ -81,6 +83,10 @@ authController.post('/login', async (req, res, next) => {
         next(new BadRequestException('Invalid credentials.'));
         return;
     }
+
+    await userUpdate(user, {
+        last_signed_in_at: DateTime.now().toUTC().toISO(),
+    });
 
     const responseData = new UserResource(user).base().create();
     const jwt = createJwt(user);
@@ -98,18 +104,20 @@ authController.post('/register', async (req, res, next) => {
 
     const data = result.data;
     const user = await userCreate({
-        email: data.email.trim(),
+        username: data.username.trim().toLowerCase(),
         first_name: data.first_name.trim(),
         last_name: data.last_name.trim(),
         password: data.password.trim(),
+        last_signed_in_at: DateTime.now().toUTC().toISO(),
     });
 
     const responseData = new UserResource(user).base().create();
+    const jwt = createJwt(user);
 
-    res.status(201).json(responseData);
+    res.status(201).cookie('jwt', jwt, { httpOnly: true, secure: true, sameSite: 'none' }).json(responseData);
 });
 
-authController.get('/users', async (req, res, next) => {
+authController.get('/users', authMiddleware, async (req, res, next) => {
     const result = paginationQueryParams.safeParse(req.query);
 
     if (result.error) {

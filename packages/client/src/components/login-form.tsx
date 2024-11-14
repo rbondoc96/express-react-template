@@ -10,7 +10,7 @@ import { FormPassword } from '@/components/form-fields/form-password';
 import { FormText } from '@/components/form-fields/form-text';
 
 const loginFormSchema = object({
-    email: string(),
+    username: string(),
     password: string(),
 });
 
@@ -21,7 +21,7 @@ export function LoginForm(): ReactNode {
 
     const form = useForm<LoginFormData>({
         defaultValues: {
-            email: '',
+            username: '',
             password: '',
         },
         resolver: zodResolver(loginFormSchema),
@@ -29,7 +29,7 @@ export function LoginForm(): ReactNode {
 
     const onLogin = form.handleSubmit(async (values: LoginFormData) => {
         const payload = {
-            email: values.email,
+            username: values.username,
             password: values.password,
         };
 
@@ -58,7 +58,7 @@ export function LoginForm(): ReactNode {
             {error && <AlertFromError error={error} />}
             <FormProvider {...form}>
                 <form noValidate onSubmit={onLogin} className="flex flex-col gap-4">
-                    <FormText type="email" control={form.control} label="Email" name="email" placeholder="Email" />
+                    <FormText control={form.control} label="Username" name="username" placeholder="Username" />
                     <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
                     <SolidButton type="submit">Login</SolidButton>
                 </form>

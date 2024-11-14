@@ -37,6 +37,7 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
 
         next();
     } catch (error) {
+        res.clearCookie('jwt');
         next(error);
     }
 };

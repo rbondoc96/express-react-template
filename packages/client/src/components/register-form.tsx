@@ -9,7 +9,7 @@ import { FormText } from '@/components/form-fields/form-text';
 import { ValidationHttpError } from '@/errors/validation-http-error';
 
 const registerFormSchema = object({
-    email: string(),
+    username: string(),
     first_name: string(),
     last_name: string(),
     password: string(),
@@ -18,7 +18,7 @@ const registerFormSchema = object({
 export function RegisterForm(): ReactNode {
     const form = useForm<output<typeof registerFormSchema>>({
         defaultValues: {
-            email: '',
+            username: '',
             first_name: '',
             last_name: '',
             password: '',
@@ -28,7 +28,7 @@ export function RegisterForm(): ReactNode {
 
     const onRegister = form.handleSubmit(async (values: output<typeof registerFormSchema>) => {
         const data = {
-            email: values.email,
+            username: values.username,
             first_name: values.first_name,
             last_name: values.last_name,
             password: values.password,
@@ -58,7 +58,7 @@ export function RegisterForm(): ReactNode {
                     <FormText control={form.control} label="First Name" name="first_name" placeholder="First name" />
                     <FormText control={form.control} label="Last Name" name="last_name" placeholder="Last name" />
                 </div>
-                <FormText type="email" control={form.control} label="Email" name="email" placeholder="Email" />
+                <FormText type="email" control={form.control} label="Username" name="username" placeholder="Username" />
                 <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
                 <SolidButton type="submit">Register</SolidButton>
             </form>

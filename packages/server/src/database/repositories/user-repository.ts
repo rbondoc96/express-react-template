@@ -7,10 +7,11 @@ import { db } from '@/database/db';
 export type UserTable = {
     id: Generated<number>;
     ulid: Generated<string>;
-    email: string;
+    username: string;
     first_name: string;
     last_name: string;
     password: string;
+    last_signed_in_at: ColumnType<Date, string, string>;
     created_at: ColumnType<Date, never, never>;
     updated_at: ColumnType<Date, never, string>;
 };
@@ -44,12 +45,12 @@ export async function userCreate(data: UserCreate): Promise<UserSelect> {
     return await db.insertInto('users').values(user).returningAll().executeTakeFirstOrThrow();
 }
 
-export async function userFindByEmail(email: string): Promise<UserSelect | undefined> {
-    return userSelectQuery().selectAll().where('email', '=', email).executeTakeFirst();
+export async function userFindByUsername(username: string): Promise<UserSelect | undefined> {
+    return userSelectQuery().selectAll().where('username', '=', username).executeTakeFirst();
 }
 
-export async function userFindByEmailOrThrow(email: string): Promise<UserSelect> {
-    return userSelectQuery().selectAll().where('email', '=', email).executeTakeFirstOrThrow();
+export async function userFindByUsernameOrThrow(username: string): Promise<UserSelect> {
+    return userSelectQuery().selectAll().where('username', '=', username).executeTakeFirstOrThrow();
 }
 
 export async function userFindByUlid(ulid: string): Promise<UserSelect | undefined> {
