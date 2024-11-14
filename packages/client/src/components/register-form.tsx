@@ -1,51 +1,36 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type ReactNode } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { object, type output, string } from 'zod';
-import { client } from '@/api/client';
 import { SolidButton } from '@/components/buttons/solid-button';
 import { FormPassword } from '@/components/form-fields/form-password';
 import { FormText } from '@/components/form-fields/form-text';
 import { ValidationHttpError } from '@/errors/validation-http-error';
-
-const registerFormSchema = object({
-    username: string(),
-    first_name: string(),
-    last_name: string(),
-    password: string(),
-});
+import {
+    type RegisterPayload,
+    registerPayloadSchema,
+    useRegisterMutation,
+} from '@/hooks/mutations/use-register-mutation';
 
 export function RegisterForm(): ReactNode {
-    const form = useForm<output<typeof registerFormSchema>>({
+    const { mutateAsync: register } = useRegisterMutation();
+
+    const form = useForm<RegisterPayload>({
         defaultValues: {
             username: '',
             first_name: '',
             last_name: '',
             password: '',
         },
-        resolver: zodResolver(registerFormSchema),
+        resolver: zodResolver(registerPayloadSchema),
     });
 
-    const onRegister = form.handleSubmit(async (values: output<typeof registerFormSchema>) => {
-        const data = {
-            username: values.username,
-            first_name: values.first_name,
-            last_name: values.last_name,
-            password: values.password,
-        };
-
-        const api = client();
-
+    const onRegister = form.handleSubmit(async (values: RegisterPayload) => {
         try {
-            await api
-                .post('api/auth/register', {
-                    json: data,
-                })
-                .json();
+            await register(values);
         } catch (error) {
             if (error instanceof ValidationHttpError) {
                 Object.entries(error.messages).forEach(([name, message]) => {
-                    form.setError(name as keyof output<typeof registerFormSchema>, { type: 'custom', message });
+                    form.setError(name as keyof RegisterPayload, { type: 'custom', message });
                 });
             }
         }

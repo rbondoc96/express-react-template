@@ -2,47 +2,27 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { HTTPError } from 'ky';
 import { type ReactNode, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { object, type output, string } from 'zod';
-import { client } from '@/api/client';
 import { AlertFromError } from '@/components/alert-from-error';
 import { SolidButton } from '@/components/buttons/solid-button';
 import { FormPassword } from '@/components/form-fields/form-password';
 import { FormText } from '@/components/form-fields/form-text';
-
-const loginFormSchema = object({
-    username: string(),
-    password: string(),
-});
-
-type LoginFormData = output<typeof loginFormSchema>;
+import { LoginPayload, loginPayloadSchema, useLoginMutation } from '@/hooks/mutations/use-login-mutation';
 
 export function LoginForm(): ReactNode {
+    const { mutateAsync: login } = useLoginMutation();
     const [error, setError] = useState<HTTPError>();
 
-    const form = useForm<LoginFormData>({
+    const form = useForm<LoginPayload>({
         defaultValues: {
             username: '',
             password: '',
         },
-        resolver: zodResolver(loginFormSchema),
+        resolver: zodResolver(loginPayloadSchema),
     });
 
-    const onLogin = form.handleSubmit(async (values: LoginFormData) => {
-        const payload = {
-            username: values.username,
-            password: values.password,
-        };
-
-        const api = client();
-
+    const onLogin = form.handleSubmit(async (values: LoginPayload) => {
         try {
-            const responseData = await api
-                .post('api/auth/login', {
-                    json: payload,
-                })
-                .json();
-
-            console.log(responseData);
+            await login(values);
         } catch (err) {
             if (err instanceof HTTPError) {
                 setError(err);

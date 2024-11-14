@@ -10,5 +10,6 @@ export function client() {
             beforeError: [handleValidationHttpError, handleGenericHttpError],
         },
         prefixUrl: env.VITE_BASE_URL,
+        retry: 1,
     });
 }

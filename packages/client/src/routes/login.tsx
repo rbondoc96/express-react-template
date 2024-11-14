@@ -1,34 +1,15 @@
-import { type ReactNode, useEffect } from 'react';
-import { client } from '@/api/client';
+import { type ReactNode } from 'react';
 import { SolidButton } from '@/components/buttons/solid-button';
 import { LoginForm } from '@/components/login-form';
-
-async function logout() {
-    const api = client();
-
-    await api.delete('api/auth');
-}
+import { useLogoutMutation } from '@/hooks/mutations/use-logout-mutation';
 
 export function Login(): ReactNode {
-    useEffect(() => {
-        async function getMe() {
-            const api = client();
-
-            try {
-                const data = api.get('api/auth').json();
-                console.log(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        void getMe();
-    }, []);
+    const { mutateAsync: logout } = useLogoutMutation();
 
     return (
         <div>
             <LoginForm />
-            <SolidButton onClick={logout}>Logout</SolidButton>
+            <SolidButton onClick={async () => await logout()}>Logout</SolidButton>
         </div>
     );
 }
