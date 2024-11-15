@@ -6,8 +6,10 @@ import { env } from './utilities/env';
 
 export const config = {
     app: {
+        allowed_origin: env.ALLOWED_ORIGIN,
+        client_domain: env.CLIENT_DOMAIN,
+        is_production: env.NODE_ENV === 'production',
         url: env.APP_URL,
-        client_url: env.CLIENT_URL,
     },
     auth: {
         jwt_private_key: readFileSync(

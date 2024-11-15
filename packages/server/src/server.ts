@@ -1,6 +1,7 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
+import { config } from '@/config';
 import { errorMiddleware } from '@/http/middlewares/error-middleware';
 import { apiRouter } from '@/routes/api';
 import { env } from '@/utilities/env';
@@ -10,7 +11,7 @@ const port = env.PORT;
 
 app.use(
     cors({
-        origin: env.ALLOWED_ORIGIN,
+        origin: config.app.allowed_origin,
         credentials: true,
     }),
 );
