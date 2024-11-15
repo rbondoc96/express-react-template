@@ -8,6 +8,7 @@ export const errorMiddleware: ErrorRequestHandler = async (err, _req, res, _next
     }
 
     if (err instanceof Error) {
+        console.log(err);
         res.status(500).json({
             success: false,
             message: err.message,

@@ -1,12 +1,12 @@
 import bcrypt from 'bcryptjs';
-import { type ColumnType, type Generated, type Insertable, type Selectable, type Updateable } from 'kysely';
+import { type ColumnType, type Insertable, type Selectable, type Updateable } from 'kysely';
 import { DateTime } from 'luxon';
 import { ulid } from 'ulid';
 import { db } from '@/database/db';
 
 export type UserTable = {
-    id: Generated<number>;
-    ulid: Generated<string>;
+    id: ColumnType<number, never, never>;
+    ulid: ColumnType<string, string | undefined, never>;
     username: string;
     first_name: string;
     last_name: string;
