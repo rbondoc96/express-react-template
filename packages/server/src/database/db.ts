@@ -11,6 +11,7 @@ const dialect = new PostgresDialect({
         port: config.database.port,
         user: config.database.user,
         max: 10,
+        ssl: true,
     }),
 });
 
