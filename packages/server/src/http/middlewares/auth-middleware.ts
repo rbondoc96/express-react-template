@@ -19,8 +19,8 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
     const jwt = req.cookies['jwt'];
 
     if (typeof jwt !== 'string') {
-        next(new BadRequestException('Unauthorized'));
         res.clearCookie('jwt');
+        next(new BadRequestException('Unauthorized'));
         return;
     }
 

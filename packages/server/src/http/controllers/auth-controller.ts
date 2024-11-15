@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import { Router } from 'express';
 import { DateTime } from 'luxon';
 import { coerce, object, string } from 'zod';
-import { config } from '@/config';
 import {
     userCount,
     userCreate,
@@ -91,15 +90,8 @@ authController.post('/login', async (req, res, next) => {
     const responseData = new UserResource(user).base().create();
     const jwt = createJwt(user);
 
-    const domain = config.app.client_domain;
-
-    if (config.app.is_production && !domain) {
-        throw new Error('CLIENT_DOMAIN must be set in production.');
-    }
-
     res.status(200)
         .cookie('jwt', jwt, {
-            domain: domain ?? undefined,
             httpOnly: true,
             sameSite: 'none',
             secure: true,
