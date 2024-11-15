@@ -40,7 +40,7 @@ export function LoginForm(): ReactNode {
                 <form noValidate onSubmit={onLogin} className="flex flex-col gap-4">
                     <FormText control={form.control} label="Username" name="username" placeholder="Username" />
                     <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
-                    <SolidButton type="submit">Login</SolidButton>
+                    <SolidButton type="submit">Sign In</SolidButton>
                 </form>
             </FormProvider>
         </div>

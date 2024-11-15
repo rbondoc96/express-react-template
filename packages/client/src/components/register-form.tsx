@@ -45,7 +45,7 @@ export function RegisterForm(): ReactNode {
                 </div>
                 <FormText type="email" control={form.control} label="Username" name="username" placeholder="Username" />
                 <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
-                <SolidButton type="submit">Register</SolidButton>
+                <SolidButton type="submit">Sign Up</SolidButton>
             </form>
         </FormProvider>
     );

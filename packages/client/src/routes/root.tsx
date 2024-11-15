@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { client } from '@/api/client';
 import { SolidButton } from '@/components/buttons/solid-button';
 import { Link } from '@/components/link';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export function Root(): ReactNode {
     const getUsers = async () => {
@@ -24,17 +25,27 @@ export function Root(): ReactNode {
     };
 
     return (
-        <div className="min-h-screen flex flex-col gap-4">
-            <div className="flex flex-col items-center">
-                <h1 className="text-4xl font-semibold">Express + React Template</h1>
-            </div>
-            <Link to="/register" variant="solid-button">
-                Sign Up
-            </Link>
-            <Link to="/login" variant="solid-button">
-                Login
-            </Link>
-            <SolidButton onClick={getUsers}>Get Users</SolidButton>
+        <div className="container flex flex-col justify-between px-8">
+            <header className="my-6">
+                <div className="flex justify-between">
+                    <Link to="/">Home</Link>
+                    <ThemeToggle />
+                </div>
+            </header>
+            <main>
+                <div className="min-h-screen flex flex-col gap-4">
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-4xl font-semibold">Express + React Template</h1>
+                    </div>
+                    <Link to="/register" variant="solid-button">
+                        Sign Up
+                    </Link>
+                    <Link to="/login" variant="solid-button">
+                        Login
+                    </Link>
+                    <SolidButton onClick={getUsers}>Get Users</SolidButton>
+                </div>
+            </main>
         </div>
     );
 }
