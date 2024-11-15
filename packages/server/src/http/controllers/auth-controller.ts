@@ -70,7 +70,7 @@ authController.delete('/', async (_req, res, _next) => {
 authController.post('/login', async (req, res, next) => {
     const result = loginPayload.safeParse(req.body);
 
-    if (result.error) {
+    if (!result.success) {
         next(ValidationException.fromZodError(result.error));
         return;
     }
@@ -111,7 +111,7 @@ authController.post('/login', async (req, res, next) => {
 authController.post('/register', async (req, res, next) => {
     const result = registerPayload.safeParse(req.body);
 
-    if (result.error) {
+    if (!result.success) {
         next(ValidationException.fromZodError(result.error));
         return;
     }
@@ -134,7 +134,7 @@ authController.post('/register', async (req, res, next) => {
 authController.get('/users', authMiddleware, async (req, res, next) => {
     const result = paginationQueryParams.safeParse(req.query);
 
-    if (result.error) {
+    if (!result.success) {
         next(new Error('Invalid query params'));
         return;
     }
@@ -148,7 +148,13 @@ authController.get('/users', authMiddleware, async (req, res, next) => {
         .limit(query.per_page)
         .execute();
 
-    const responseData = new UserResource(users).base().pagination(count, query).create();
+    const responseData = new UserResource(users)
+        .base()
+        .pagination(count, {
+            page: query.page,
+            per_page: query.per_page,
+        })
+        .create();
 
     res.status(200).json(responseData);
 });
