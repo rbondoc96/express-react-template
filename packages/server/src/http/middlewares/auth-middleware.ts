@@ -19,7 +19,7 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
     const jwt = req.cookies['jwt'];
 
     if (typeof jwt !== 'string') {
-        res.clearCookie('jwt');
+        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
         next(new BadRequestException('Unauthorized'));
         return;
     }
@@ -28,6 +28,7 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
         const payload = jsonwebtoken.verify(jwt, config.auth.jwt_public_key);
 
         if (typeof payload === 'string') {
+            res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
             next(new BadRequestException('Invalid payload.'));
             return;
         }
@@ -37,7 +38,7 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
 
         next();
     } catch (error) {
-        res.clearCookie('jwt');
+        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
         next(error);
     }
 };

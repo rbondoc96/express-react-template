@@ -62,7 +62,7 @@ authController.get('/', authMiddleware, async (req, res, _next) => {
 });
 
 authController.delete('/', async (_req, res, _next) => {
-    res.clearCookie('jwt').sendStatus(204);
+    res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true }).sendStatus(204);
 });
 
 authController.post('/login', async (req, res, next) => {
