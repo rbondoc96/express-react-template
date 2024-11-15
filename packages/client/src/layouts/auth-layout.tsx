@@ -1,6 +1,7 @@
-import { ReloadIcon } from '@radix-ui/react-icons';
+import { HomeIcon, ReloadIcon } from '@radix-ui/react-icons';
 import { type ReactNode } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { Link } from '@/components/link';
 import { useMeQuery } from '@/hooks/queries/use-me-query';
 
 // Fetch on render vs render on fetch?
@@ -21,7 +22,14 @@ export function AuthLayout(): ReactNode {
             <div className="flex-1 bg-gray-500" />
             <div className="flex-1">
                 <div className="h-full p-6">
-                    <Outlet />
+                    <div className="flex flex-col items-center">
+                        <Link className="my-8" to="/">
+                            <HomeIcon className="h-8 w-8" />
+                        </Link>
+                        <div className="self-stretch">
+                            <Outlet />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

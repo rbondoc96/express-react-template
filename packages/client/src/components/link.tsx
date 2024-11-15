@@ -9,7 +9,7 @@ const styles = cva(['text-accent-foreground hover:underline'], {
     variants: {
         variant: {
             'icon-button': ['hover:no-underline'],
-            'solid-button': ['text-white', 'hover:no-underline'],
+            'solid-button': ['text-primary-foreground', 'hover:no-underline'],
         },
     },
 });

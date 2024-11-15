@@ -165,9 +165,9 @@ export function FormFieldPrimitiveRoot<
             control={control}
             name={name}
             render={({ field }) => (
-                <div className="flex flex-col gap-0.5 self-stretch">
+                <div className="flex flex-col gap-1.5 self-stretch">
                     {label && <FormFieldPrimitiveLabel>{label}</FormFieldPrimitiveLabel>}
-                    {children(field)}
+                    <div className="text-black">{children(field)}</div>
                     <div className="flex flex-col gap-y-px">
                         {description && <FormFieldPrimitiveDescription>{description}</FormFieldPrimitiveDescription>}
                         <FormFieldPrimitiveError />

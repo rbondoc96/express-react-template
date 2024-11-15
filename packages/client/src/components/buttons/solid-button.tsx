@@ -13,7 +13,7 @@ const styles = cva(['rounded-md', 'outline-0', 'text-center'], {
             xs: ['font-medium text-xs'],
         },
         theme: {
-            primary: ['bg-primary', 'text-white', 'hover:bg-primary/90'],
+            primary: ['bg-primary', 'text-primary-foreground', 'hover:bg-primary/90'],
         },
     },
     defaultVariants: {
