@@ -1,27 +1,34 @@
-import { cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef, type JSX } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { IconButton } from '@/components/buttons/icon-button';
 import { SolidButton } from '@/components/buttons/solid-button';
 import { cn } from '@/utilities/cn';
 
-const styles = cva(['text-accent hover:text-accent-hover']);
+const styles = cva(['text-accent-foreground hover:underline'], {
+    variants: {
+        variant: {
+            'icon-button': ['hover:no-underline'],
+            'solid-button': ['text-white', 'hover:no-underline'],
+        },
+    },
+});
 
 type HtmlAnchorProps = JSX.IntrinsicElements['a'];
 type PickedProps = Omit<HtmlAnchorProps, 'rel' | 'target'>;
 
-type LinkProps = PickedProps & {
-    // Accepts any string, but gives intellisense for 'noreferrer'
-    rel?: 'noreferrer' | (string & {});
-    target?: '_blank' | '_self' | '_parent' | '_top';
-    to?: string;
-    variant?: 'icon-button' | 'solid-button';
-    viewTransition?: boolean;
-};
+type LinkProps = PickedProps &
+    VariantProps<typeof styles> & {
+        // Accepts any string, but gives intellisense for 'noreferrer'
+        rel?: 'noreferrer' | (string & {});
+        target?: '_blank' | '_self' | '_parent' | '_top';
+        to?: string;
+        viewTransition?: boolean;
+    };
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     ({ children, className, href, rel, target, to, variant, viewTransition, ...props }, ref) => {
-        const composedClassName = cn(styles(), className);
+        const composedClassName = cn(styles({ variant: variant }), className);
 
         const Component =
             to !== undefined ? (
