@@ -17,7 +17,7 @@
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "server:build": "npm -w packages/server run build",
-        "server:deploy": "./scripts/generate-rsa-keys.sh && npm -w packages/server run deploy && npm -w packages/server run kysely migrate:up",
+        "server:deploy": "./scripts/generate-rsa-keys.sh && npm -w packages/server run deploy && npm -w packages/server run migrate:up",
         "server:dev": "npm -w packages/server run dev",
         "server:start": "npm -w packages/server start"
     },

@@ -17,6 +17,7 @@
         "kysely": "kysely",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
+        "migrate:up": "kysely migrate:up",
         "start": "node dist/index.js",
         "stan": "tsc --noEmit --skipLibCheck",
         "test": "vitest --run"
