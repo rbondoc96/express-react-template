@@ -12,6 +12,7 @@ export const config = {
         url: env.APP_URL,
     },
     auth: {
+        jwt_expire_minutes: env.JWT_EXPIRE_MINUTES,
         jwt_private_key: readFileSync(
             join(dirname(fileURLToPath(import.meta.url)), '..', 'jwtRSA256-private.pem'),
             'utf-8',

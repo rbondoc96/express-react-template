@@ -12,6 +12,7 @@ const envParser = object({
     DB_PASSWORD: string(),
     DB_PORT: coerce.number(),
     DB_USER: string(),
+    JWT_EXPIRE_MINUTES: coerce.number(),
     NODE_ENV: union([literal('development'), literal('production')]).default('development'),
     PORT: coerce.number().default(8000),
     RENDER: string().transform((value) => value.toLowerCase() === 'true'),
