@@ -14,6 +14,7 @@ const envParser = object({
     DB_USER: string(),
     NODE_ENV: union([literal('development'), literal('production')]).default('development'),
     PORT: coerce.number().default(8000),
+    RENDER: string().transform((value) => value.toLowerCase() === 'true'),
 });
 
 export const env = envParser.parse(process.env);

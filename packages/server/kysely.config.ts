@@ -13,7 +13,7 @@ export default defineConfig({
             password: config.database.password,
             port: config.database.port,
             user: config.database.user,
-            ssl: true,
+            ssl: config.app.is_production,
         }),
     },
     migrations: {

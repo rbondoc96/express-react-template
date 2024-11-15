@@ -8,7 +8,7 @@ export const config = {
     app: {
         allowed_origin: env.ALLOWED_ORIGIN,
         client_domain: env.CLIENT_DOMAIN,
-        is_production: env.NODE_ENV === 'production',
+        is_production: env.RENDER,
         url: env.APP_URL,
     },
     auth: {
