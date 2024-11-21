@@ -43,7 +43,10 @@
         "@types/jsonwebtoken": "^9.0.7",
         "@types/luxon": "^3.4.2",
         "@types/pg": "^8.11.10",
+        "@types/supertest": "^6.0.2",
         "kysely-ctl": "^0.9.0",
+        "supertest": "^7.0.0",
+        "ts-node": "^10.9.2",
         "tsc-alias": "^1.8.10",
         "tsx": "^4.19.2"
     }

@@ -6,10 +6,10 @@ import { errorMiddleware } from '@/http/middlewares/error-middleware';
 import { apiRouter } from '@/routes/api';
 import { env } from '@/utilities/env';
 
-const app = express();
+export const server = express();
 const port = env.PORT;
 
-app.use(
+server.use(
     cors({
         origin: config.app.allowed_origin,
         credentials: true,
@@ -17,16 +17,16 @@ app.use(
 );
 
 // Parse application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: false }));
+server.use(express.urlencoded({ extended: false }));
 // Parse application/json
-app.use(express.json());
+server.use(express.json());
 // Parse cookies in request headers
-app.use(cookieParser());
+server.use(cookieParser());
 
-app.use('/api', apiRouter);
+server.use('/api', apiRouter);
 
-app.use(errorMiddleware);
+server.use(errorMiddleware);
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });

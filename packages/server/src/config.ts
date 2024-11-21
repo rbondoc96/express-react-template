@@ -8,6 +8,7 @@ export const config = {
     app: {
         allowed_origin: env.ALLOWED_ORIGIN,
         client_domain: env.CLIENT_DOMAIN,
+        env: env.NODE_ENV,
         is_production: env.RENDER,
         url: env.APP_URL,
     },

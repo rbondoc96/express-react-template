@@ -5,6 +5,7 @@ import { coerce, object, string } from 'zod';
 import {
     userCount,
     userCreate,
+    userFindByUsername,
     userFindByUsernameOrThrow,
     userSelectQuery,
     userUpdate,
@@ -30,16 +31,24 @@ const loginPayload = object({
 });
 
 const registerPayload = object({
-    username: string().min(1, {
+    username: string({
+        message: 'The username field is required.',
+    }).min(1, {
         message: 'The username field is required.',
     }),
-    first_name: string().min(1, {
+    first_name: string({
+        message: 'The first name field is required.',
+    }).min(1, {
         message: 'The first name field is required.',
     }),
-    last_name: string().min(1, {
+    last_name: string({
+        message: 'The last name field is required.',
+    }).min(1, {
         message: 'The last name field is required.',
     }),
-    password: string().min(1, {
+    password: string({
+        message: 'The password field is required.',
+    }).min(1, {
         message: 'The password field is required.',
     }),
 });
@@ -108,6 +117,12 @@ authController.post('/register', async (req, res, next) => {
     }
 
     const data = result.data;
+
+    if (await userFindByUsername(data.username)) {
+        next(new BadRequestException('A user with this username already exists.'));
+        return;
+    }
+
     const user = await userCreate({
         username: data.username.trim().toLowerCase(),
         first_name: data.first_name.trim(),

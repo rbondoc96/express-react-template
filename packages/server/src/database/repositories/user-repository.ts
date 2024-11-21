@@ -11,7 +11,7 @@ export type UserTable = {
     first_name: string;
     last_name: string;
     password: string;
-    last_signed_in_at: ColumnType<Date, string, string>;
+    last_signed_in_at: ColumnType<Date, string | undefined, string>;
     created_at: ColumnType<Date, never, never>;
     updated_at: ColumnType<Date, never, string>;
 };

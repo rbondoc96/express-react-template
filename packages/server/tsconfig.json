@@ -3,10 +3,11 @@
     "include": ["__mocks__", "__tests__", "kysely", "kysely.config.ts", "src"],
     "compilerOptions": {
         // Project Environment
-        "lib": ["ES2020"],
+        "lib": ["ES2021"],
         "paths": {
             "@/*": ["./src/*"],
-            "@mocks/*": ["./__mocks__/*"]
+            "@mocks/*": ["./__mocks__/*"],
+            "@tests/*": ["./__tests__/*"]
         },
         "sourceMap": true,
 
