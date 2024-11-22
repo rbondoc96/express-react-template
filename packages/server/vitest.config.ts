@@ -13,6 +13,7 @@ export default defineConfig({
     test: {
         env: loadEnv('test', process.cwd(), ''),
         environment: 'node',
+        fileParallelism: false,
         include: ['__tests__/**/*.spec.ts'],
         setupFiles: [resolve(__dirname, '__tests__/setup.ts')],
     },

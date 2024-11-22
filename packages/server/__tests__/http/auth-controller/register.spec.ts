@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
+import { UserFactory } from '@tests/factories/user-factory';
 import { TestServer } from '@tests/test-server';
-import { userCreate } from '@/database/repositories/user-repository';
 import { server } from '@/server';
 
 describe('register', () => {
@@ -21,18 +21,13 @@ describe('register', () => {
     });
 
     test('register with existing username', async () => {
-        await userCreate({
-            first_name: 'Test',
-            last_name: 'User',
-            username: 'user',
-            password: '#Password1234',
-        });
+        const user = await new UserFactory().password('#Password1234').create();
 
         const testServer = new TestServer(server);
         const response = await testServer.postJson('/api/auth/register', {
             first_name: 'Test',
             last_name: 'User',
-            username: 'user',
+            username: user.username,
             password: '#Password1234',
         });
 
