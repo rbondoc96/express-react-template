@@ -13,6 +13,8 @@ export default defineConfig({
     test: {
         env: loadEnv('test', process.cwd(), ''),
         environment: 'node',
+        // Set to false due to database having to be created and destroyed
+        // for each file
         fileParallelism: false,
         include: ['__tests__/**/*.spec.ts'],
         setupFiles: [resolve(__dirname, '__tests__/setup.ts')],
