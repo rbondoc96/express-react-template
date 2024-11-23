@@ -1,36 +1,42 @@
 import { describe, expect, test } from 'vitest';
 import { UserFactory } from '@tests/factories/user-factory';
-import { TestServer } from '@tests/test-server';
+import { TestRequest } from '@tests/test-request';
 import { server } from '@/server';
 
 describe('register', () => {
     test('register success', async () => {
-        const testServer = new TestServer(server);
-        const response = await testServer.postJson('/api/auth/register', {
+        // Arrange
+        const request = new TestRequest(server);
+
+        // Act
+        const response = await request.postJson('/api/auth/register', {
             first_name: 'Test',
             last_name: 'User',
             username: 'user',
             password: '#Password1234',
         });
 
+        // Assert
         response.assertCreated();
-
         expect(response.header('set-cookie')).toBeTruthy();
         expect(response.header('set-cookie')).toHaveLength(1);
         expect(response.header('set-cookie')?.[0]).toContain('jwt=');
     });
 
     test('register with existing username', async () => {
+        // Arrange
+        const request = new TestRequest(server);
         const user = await new UserFactory().password('#Password1234').create();
 
-        const testServer = new TestServer(server);
-        const response = await testServer.postJson('/api/auth/register', {
+        // Act
+        const response = await request.postJson('/api/auth/register', {
             first_name: 'Test',
             last_name: 'User',
             username: user.username,
             password: '#Password1234',
         });
 
+        // Assert
         response.assertBadRequest();
         response.assertJsonError('A user with this username already exists.');
     });
@@ -57,9 +63,13 @@ describe('register', () => {
             { password: 'The password field is required.' },
         ],
     ])('register validation without %s', async (_, body, errors) => {
-        const testServer = new TestServer(server);
-        const response = await testServer.postJson('/api/auth/register', body);
+        // Arrange
+        const request = new TestRequest(server);
 
+        // Act
+        const response = await request.postJson('/api/auth/register', body);
+
+        // Assert
         response.assertUnprocessable();
         response.assertJsonErrors(errors);
     });

@@ -1,12 +1,16 @@
 import { describe, expect, test } from 'vitest';
-import { TestServer } from '@tests/test-server';
+import { TestRequest } from '@tests/test-request';
 import { server } from '@/server';
 
 describe('logout', () => {
     test('logout success', async () => {
-        const testServer = new TestServer(server);
-        const response = await testServer.deleteJson('/api/auth');
+        // Arrange
+        const request = new TestRequest(server);
 
+        // Act
+        const response = await request.deleteJson('/api/auth');
+
+        // Assert
         response.assertNoContent();
         expect(response.header('set-cookie')).toBeTruthy();
         expect(response.header('set-cookie')).toHaveLength(1);

@@ -45,6 +45,10 @@ export async function userCreate(data: UserCreate): Promise<UserSelect> {
     return await db.insertInto('users').values(user).returningAll().executeTakeFirstOrThrow();
 }
 
+export async function userDelete(ulid: string): Promise<void> {
+    await db.deleteFrom('users').where('ulid', '=', ulid).execute();
+}
+
 export async function userFindByUsername(username: string): Promise<UserSelect | undefined> {
     return userSelectQuery().selectAll().where('username', '=', username).executeTakeFirst();
 }
