@@ -6,11 +6,11 @@ import {
     userCount,
     userCreate,
     userFindByUsername,
-    userFindByUsernameOrThrow,
     userSelectQuery,
     userUpdate,
 } from '@/database/repositories/user-repository';
 import { BadRequestException } from '@/exceptions/bad-request-exception';
+import { NotAuthenticatedException } from '@/exceptions/not-authenticated-exception';
 import { ValidationException } from '@/exceptions/validation-exception';
 import { authMiddleware } from '@/http/middlewares/auth-middleware';
 import { UserResource } from '@/http/resources/user-resource';
@@ -55,14 +55,12 @@ const registerPayload = object({
 
 export const authController = Router();
 
-authController.get('/', authMiddleware, async (req, res, _next) => {
+authController.get('/', authMiddleware, async (req, res, next) => {
     const user = req.user;
 
     if (!user) {
-        res.status(401).json({
-            success: false,
-            message: 'Unauthenticated.',
-        });
+        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
+        next(new NotAuthenticatedException());
         return;
     }
 
@@ -83,7 +81,12 @@ authController.post('/login', async (req, res, next) => {
     }
 
     const data = result.data;
-    const user = await userFindByUsernameOrThrow(data.username);
+    const user = await userFindByUsername(data.username);
+
+    if (!user) {
+        next(new BadRequestException('Invalid credentials.'));
+        return;
+    }
 
     const match = await bcrypt.compare(data.password, user.password);
 
