@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import { authController } from '@/http/controllers/auth-controller';
-import swaggerDocument from '@/swagger.json';
+import swaggerDocument from '@/swagger.json' with { type: 'json' };
 
 export const apiRouter = Router();
 

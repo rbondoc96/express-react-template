@@ -11,6 +11,7 @@
         "module": "ESNext",
         "moduleResolution": "Node",
         "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
 
         // Build
         "outDir": "./dist"
