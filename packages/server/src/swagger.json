@@ -1,0 +1,22 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Express React Template API",
+        "description": "A template project for projects using Express and React",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth": {
+            "get": {
+                "summary": "Information on the currently authenticated user.",
+                "description": "Returns data related to the currently authenticated user.",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        }
+    }
+}
