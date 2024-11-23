@@ -5,12 +5,19 @@ type Pagination = {
     total: number;
 };
 
+type ResourceData = {
+    data: Record<string, unknown> | Array<Record<string, unknown>>;
+    meta: Pagination | undefined;
+    success: boolean;
+};
+
 export class Resource<T> {
     protected _formatter: undefined | ((data: T) => Record<string, unknown>);
     protected _pagination: Pagination | undefined;
+    public data: Record<string, unknown> | Array<Record<string, unknown>> | null;
 
     constructor(protected readonly resource: T | T[]) {
-        //
+        this.data = null;
     }
 
     public pagination(count: number, query: { page: number; per_page: number }): this {
@@ -23,17 +30,17 @@ export class Resource<T> {
         return this;
     }
 
-    public create(): Record<string, unknown> | Array<Record<string, unknown>> {
+    public create(): ResourceData {
         if (!this._formatter) {
             throw new Error('No format specified.');
         }
 
-        const data = Array.isArray(this.resource) ? this.resource.map(this._formatter) : this._formatter(this.resource);
+        this.data = Array.isArray(this.resource) ? this.resource.map(this._formatter) : this._formatter(this.resource);
 
         return {
-            success: true,
+            data: this.data,
             meta: this._pagination,
-            data,
+            success: true,
         };
     }
 }

@@ -14,6 +14,11 @@ export class TestResponse {
         return this.response.headers;
     }
 
+    public assertJsonData(data: Record<string, unknown> | Array<Record<string, unknown>>): void {
+        expect(this.response.body.data).toBeTruthy();
+        expect(this.response.body.data).toStrictEqual(data);
+    }
+
     public assertJsonError(message: string): void {
         expect(this.response.body.message).toBeTruthy();
         expect(typeof this.response.body.message).toEqual('string');
@@ -35,6 +40,10 @@ export class TestResponse {
 
     public assertCreated(): void {
         expect(this.response.status).toEqual(201);
+    }
+
+    public assertNoContent(): void {
+        expect(this.response.status).toEqual(204);
     }
 
     public assertBadRequest(): void {
