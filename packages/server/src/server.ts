@@ -22,6 +22,10 @@ server.use(express.json());
 // Parse cookies in request headers
 server.use(cookieParser());
 
+server.get('/', (_req, res, _next) => {
+    res.redirect('/api/docs');
+});
+
 server.use('/api', apiRouter);
 
 server.use(errorMiddleware);
