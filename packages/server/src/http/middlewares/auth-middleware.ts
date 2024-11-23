@@ -1,5 +1,5 @@
 import { type Request, type RequestHandler } from 'express';
-import jsonwebtoken, { TokenExpiredError } from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import { number, object, string } from 'zod';
 import { config } from '@/config';
 import { userFindByUlid } from '@/database/repositories/user-repository';
@@ -40,7 +40,7 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
     } catch (error) {
         res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
 
-        if (error instanceof TokenExpiredError) {
+        if (error instanceof jsonwebtoken.TokenExpiredError) {
             next(new NotAuthenticatedException());
             return;
         }

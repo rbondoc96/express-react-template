@@ -4,10 +4,9 @@ import express from 'express';
 import { config } from '@/config';
 import { errorMiddleware } from '@/http/middlewares/error-middleware';
 import { apiRouter } from '@/routes/api';
-import { env } from '@/utilities/env';
 
 export const server = express();
-const port = env.PORT;
+const port = config.app.port;
 
 server.use(
     cors({
@@ -28,5 +27,7 @@ server.use('/api', apiRouter);
 server.use(errorMiddleware);
 
 server.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
+    if (config.app.env === 'development') {
+        console.log(`[server]: Server is running at http://localhost:${port}`);
+    }
 });

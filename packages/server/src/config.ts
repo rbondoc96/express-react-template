@@ -10,6 +10,7 @@ export const config = {
         client_domain: env.CLIENT_DOMAIN,
         env: env.NODE_ENV,
         is_production: env.RENDER,
+        port: env.PORT,
         url: env.APP_URL,
     },
     auth: {
