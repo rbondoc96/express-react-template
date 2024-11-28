@@ -1,0 +1,17 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "include": ["src"],
+    "compilerOptions": {
+        // Project Environment
+        "lib": ["ES2021"],
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "sourceMap": true,
+
+        // General
+        "target": "ES2020",
+        "module": "ESNext",
+        "moduleResolution": "Node"
+    }
+}
