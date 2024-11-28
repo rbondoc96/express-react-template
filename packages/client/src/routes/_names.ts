@@ -14,3 +14,4 @@ export const ROUTE_DASHBOARD = Route(Symbol('dashboard'), '/dashboard');
 export const ROUTE_LOGIN = Route(Symbol('login'), '/login');
 export const ROUTE_REGISTER = Route(Symbol('register'), '/register');
 export const ROUTE_ROOT = Route(Symbol('root'), '/');
+export const ROUTE_SETTINGS = Route(Symbol('settings'), '/settings');

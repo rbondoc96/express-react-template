@@ -66,7 +66,7 @@ export function AppSidebar(): React.ReactNode {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link href="#">
+                            <Link to="/settings">
                                 <Settings />
                                 <span>Settings</span>
                             </Link>

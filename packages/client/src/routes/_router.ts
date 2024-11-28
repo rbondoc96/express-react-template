@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from '@/routes/_layouts/app-layout';
 import { AuthLayout } from '@/routes/_layouts/auth-layout';
-import { ROUTE_DASHBOARD, ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_ROOT } from '@/routes/_names';
+import { ROUTE_DASHBOARD, ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_ROOT, ROUTE_SETTINGS } from '@/routes/_names';
 import { Dashboard } from '@/routes/app/dashboard';
+import { Settings } from '@/routes/app/settings';
 import { Login } from '@/routes/login';
 import { Register } from '@/routes/register';
 import { Root } from '@/routes/root';
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                 path: ROUTE_DASHBOARD.path,
                 Component: Dashboard,
+            },
+            {
+                path: ROUTE_SETTINGS.path,
+                Component: Settings,
             },
         ],
     },
