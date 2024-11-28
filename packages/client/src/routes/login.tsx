@@ -2,10 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { HTTPError } from 'ky';
 import { type ReactNode, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { FormPassword } from '@/components/form-fields/form-password';
-import { FormText } from '@/components/form-fields/form-text';
 import { AlertFromError } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { FormPassword, FormText } from '@/components/ui/form';
 import { Link } from '@/components/ui/link';
 import { type LoginPayload, loginPayloadSchema, useLoginMutation } from '@/hooks/mutations/use-login-mutation';
 

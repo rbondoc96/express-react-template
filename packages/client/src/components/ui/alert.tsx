@@ -1,9 +1,10 @@
 import { ExclamationTriangleIcon, InfoCircledIcon } from '@radix-ui/react-icons';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { type ElementRef, forwardRef, type JSX } from 'react';
+import * as React from 'react';
+import { type HtmlProps } from '@/components/types';
 import { cn } from '@/utilities/cn';
 
-const AlertDescription = forwardRef<HTMLParagraphElement, JSX.IntrinsicElements['p']>(
+const AlertDescription = React.forwardRef<HTMLParagraphElement, HtmlProps<'p'>>(
     ({ className, children, ...props }, ref) => {
         return (
             <p className={cn('text-sm leading-relaxed', className)} ref={ref} {...props}>
@@ -14,15 +15,13 @@ const AlertDescription = forwardRef<HTMLParagraphElement, JSX.IntrinsicElements[
 );
 AlertDescription.displayName = 'AlertDescription';
 
-const AlertTitle = forwardRef<HTMLHeadingElement, JSX.IntrinsicElements['h5']>(
-    ({ className, children, ...props }, ref) => {
-        return (
-            <h5 className={cn('mb-1 font-medium leading-none tracking-light', className)} ref={ref} {...props}>
-                {children}
-            </h5>
-        );
-    },
-);
+const AlertTitle = React.forwardRef<HTMLHeadingElement, HtmlProps<'h5'>>(({ className, children, ...props }, ref) => {
+    return (
+        <h5 className={cn('mb-1 font-medium leading-none tracking-light', className)} ref={ref} {...props}>
+            {children}
+        </h5>
+    );
+});
 AlertTitle.displayName = 'AlertTitle';
 
 const styles = cva(
@@ -48,12 +47,12 @@ const styles = cva(
 );
 
 type AlertProps = VariantProps<typeof styles> &
-    Omit<JSX.IntrinsicElements['div'], 'children' | 'title'> & {
+    Omit<HtmlProps<'div'>, 'children' | 'title'> & {
         description: string;
         title: string;
     };
 
-export const Alert = forwardRef<HTMLDivElement, AlertProps>(
+export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     ({ className, description, title, variant, ...props }, ref) => {
         const Icon = variant === 'default' ? InfoCircledIcon : ExclamationTriangleIcon;
 
@@ -71,9 +70,11 @@ Alert.displayName = 'Alert';
 type AlertFromErrorProps = {
     error: unknown;
 };
-export const AlertFromError = forwardRef<ElementRef<typeof Alert>, AlertFromErrorProps>(({ error }, ref) => {
-    const message = error instanceof Error ? error.message : 'Something went wrong.';
+export const AlertFromError = React.forwardRef<React.ElementRef<typeof Alert>, AlertFromErrorProps>(
+    ({ error }, ref) => {
+        const message = error instanceof Error ? error.message : 'Something went wrong.';
 
-    return <Alert description={message} ref={ref} title="Error" variant="error" />;
-});
+        return <Alert description={message} ref={ref} title="Error" variant="error" />;
+    },
+);
 AlertFromError.displayName = 'AlertFromError';

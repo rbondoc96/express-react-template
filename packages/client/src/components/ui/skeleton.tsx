@@ -1,7 +1,7 @@
-import { type JSX } from 'react';
+import { type HtmlProps } from '@/components/types';
 import { cn } from '@/utilities/cn';
 
-type SkeletonProps = JSX.IntrinsicElements['div'];
+type SkeletonProps = HtmlProps<'div'>;
 
 export function Skeleton({ children, className, ...props }: SkeletonProps) {
     return (

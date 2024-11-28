@@ -1,10 +1,12 @@
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
-import { type ReactNode, useEffect } from 'react';
+import * as React from 'react';
 import { IconButton } from '@/components/buttons/icon-button';
-import { DropdownMenu } from '@/components/dropdown-menu/dropdown-menu';
-import { DropdownMenuContent } from '@/components/dropdown-menu/dropdown-menu-content';
-import { DropdownMenuItem } from '@/components/dropdown-menu/dropdown-menu-item';
-import { DropdownMenuTrigger } from '@/components/dropdown-menu/dropdown-menu-trigger';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { type Theme, useSetTheme, useTheme } from '@/hooks/use-local-store';
 
 function getSystemTheme(): Exclude<Theme, 'system'> {
@@ -21,12 +23,12 @@ function applyTheme(theme: Theme): void {
     setTimeout(() => document.body.classList.remove('no-transition'), 100);
 }
 
-export function ThemeToggle(): ReactNode {
+export function ThemeToggle(): React.ReactNode {
     const theme = useTheme();
     const setTheme = useSetTheme();
     const appliedTheme = theme !== 'system' ? theme : getSystemTheme() === 'dark' ? 'dark' : 'light';
 
-    useEffect(() => {
+    React.useEffect(() => {
         applyTheme(theme);
     }, [theme]);
 

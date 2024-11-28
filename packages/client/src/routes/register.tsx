@@ -1,18 +1,12 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { HTTPError } from 'ky';
 import { type ReactNode, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { FormPassword } from '@/components/form-fields/form-password';
-import { FormText } from '@/components/form-fields/form-text';
 import { AlertFromError } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { FormPassword, FormText } from '@/components/ui/form';
 import { Link } from '@/components/ui/link';
 import { ValidationHttpError } from '@/errors/validation-http-error';
-import {
-    type RegisterPayload,
-    registerPayloadSchema,
-    useRegisterMutation,
-} from '@/hooks/mutations/use-register-mutation';
+import { type RegisterPayload, useRegisterMutation } from '@/hooks/mutations/use-register-mutation';
 
 export function Register(): ReactNode {
     const { mutateAsync: register } = useRegisterMutation();
@@ -25,7 +19,7 @@ export function Register(): ReactNode {
             last_name: '',
             password: '',
         },
-        resolver: zodResolver(registerPayloadSchema),
+        // resolver: zodResolver(registerPayloadSchema),
     });
 
     const onRegister = form.handleSubmit(async (values) => {

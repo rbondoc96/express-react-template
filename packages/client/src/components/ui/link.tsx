@@ -1,8 +1,9 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { forwardRef, type JSX } from 'react';
+import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { IconButton } from '@/components/buttons/icon-button';
 import { SolidButton } from '@/components/buttons/solid-button';
+import { HtmlProps } from '@/components/types';
 import { cn } from '@/utilities/cn';
 
 const styles = cva(['text-accent-foreground hover:underline'], {
@@ -14,8 +15,7 @@ const styles = cva(['text-accent-foreground hover:underline'], {
     },
 });
 
-type HtmlAnchorProps = JSX.IntrinsicElements['a'];
-type PickedProps = Omit<HtmlAnchorProps, 'rel' | 'target'>;
+type PickedProps = Omit<HtmlProps<'a'>, 'rel' | 'target'>;
 
 type LinkProps = PickedProps &
     VariantProps<typeof styles> & {
@@ -26,7 +26,7 @@ type LinkProps = PickedProps &
         viewTransition?: boolean;
     };
 
-export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
     ({ children, className, href, rel, target, to, variant, viewTransition, ...props }, ref) => {
         const composedClassName = cn(styles({ variant: variant }), className);
 
