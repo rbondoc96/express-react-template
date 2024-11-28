@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { AppLayout } from '@/layouts/app-layout';
-import { AuthLayout } from '@/layouts/auth-layout';
+import { AppLayout } from '@/routes/_layouts/app-layout';
+import { AuthLayout } from '@/routes/_layouts/auth-layout';
 import { ROUTE_DASHBOARD, ROUTE_LOGIN, ROUTE_REGISTER, ROUTE_ROOT } from '@/routes/_names';
 import { Dashboard } from '@/routes/app/dashboard';
 import { Login } from '@/routes/login';
