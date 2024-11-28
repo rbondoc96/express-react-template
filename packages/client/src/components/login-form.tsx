@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { HTTPError } from 'ky';
 import { type ReactNode, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { AlertFromError } from '@/components/alert-from-error';
 import { SolidButton } from '@/components/buttons/solid-button';
 import { FormPassword } from '@/components/form-fields/form-password';
 import { FormText } from '@/components/form-fields/form-text';
+import { AlertFromError } from '@/components/ui/alert';
 import { LoginPayload, loginPayloadSchema, useLoginMutation } from '@/hooks/mutations/use-login-mutation';
 
 export function LoginForm(): ReactNode {

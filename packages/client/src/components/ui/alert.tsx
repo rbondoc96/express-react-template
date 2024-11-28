@@ -1,6 +1,6 @@
 import { ExclamationTriangleIcon, InfoCircledIcon } from '@radix-ui/react-icons';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { forwardRef, type JSX } from 'react';
+import { type ElementRef, forwardRef, type JSX } from 'react';
 import { cn } from '@/utilities/cn';
 
 const AlertDescription = forwardRef<HTMLParagraphElement, JSX.IntrinsicElements['p']>(
@@ -67,3 +67,13 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     },
 );
 Alert.displayName = 'Alert';
+
+type AlertFromErrorProps = {
+    error: unknown;
+};
+export const AlertFromError = forwardRef<ElementRef<typeof Alert>, AlertFromErrorProps>(({ error }, ref) => {
+    const message = error instanceof Error ? error.message : 'Something went wrong.';
+
+    return <Alert description={message} ref={ref} title="Error" variant="error" />;
+});
+AlertFromError.displayName = 'AlertFromError';

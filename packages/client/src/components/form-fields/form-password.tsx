@@ -1,7 +1,7 @@
 import { type ReactNode, useId, useState } from 'react';
 import { type ControllerProps, type FieldPath, type FieldValues } from 'react-hook-form';
-import { Checkbox } from '@/components/checkbox';
 import { FormFieldPrimitiveControl, FormFieldPrimitiveRoot } from '@/components/primitives/form-field-primitives';
+import { Checkbox } from '@/components/ui/checkbox';
 import { cn } from '@/utilities/cn';
 
 type FormPasswordProps<

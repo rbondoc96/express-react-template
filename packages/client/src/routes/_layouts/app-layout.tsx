@@ -3,11 +3,11 @@ import Cookies from 'js-cookie';
 import { Calendar, CircleUserRound, Home, Inbox, LoaderCircle, Search, Settings } from 'lucide-react';
 import { type ExoticComponent, type ReactNode, useMemo } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { Button } from '@/components/button';
-import { Link } from '@/components/link';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarProvider, SidebarTrigger } from '@/components/sidebar/sidebar';
 import { SidebarGroup, SidebarGroupContent } from '@/components/sidebar/sidebar-group';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/sidebar/sidebar-menu';
+import { Button } from '@/components/ui/button';
+import { Link } from '@/components/ui/link';
 import { useMeQuery } from '@/hooks/queries/use-me-query';
 
 type Item = {

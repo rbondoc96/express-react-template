@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { LoaderCircle } from 'lucide-react';
 import { type ReactNode } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { Link } from '@/components/link';
+import { Link } from '@/components/ui/link';
 import { useMeQuery } from '@/hooks/queries/use-me-query';
 
 export function AuthLayout(): ReactNode {

@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
-import { Link } from '@/components/link';
 import { RegisterForm } from '@/components/register-form';
+import { Link } from '@/components/ui/link';
 
 export function Register(): ReactNode {
     return (

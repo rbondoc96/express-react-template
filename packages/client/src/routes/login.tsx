@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
-import { Link } from '@/components/link';
 import { LoginForm } from '@/components/login-form';
+import { Link } from '@/components/ui/link';
 
 export function Login(): ReactNode {
     return (

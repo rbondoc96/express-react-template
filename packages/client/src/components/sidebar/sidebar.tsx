@@ -12,10 +12,10 @@ import {
     useMemo,
     useState,
 } from 'react';
-import { Button } from '@/components/button';
-import { Separator } from '@/components/separator';
-import { Sheet, SheetContent } from '@/components/sheet';
-import { TooltipProvider } from '@/components/tooltip';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/utilities/cn';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar:state';

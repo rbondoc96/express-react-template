@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
 import { client } from '@/api/client';
 import { SolidButton } from '@/components/buttons/solid-button';
-import { Link } from '@/components/link';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { Link } from '@/components/ui/link';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export function Root(): ReactNode {
     const getUsers = async () => {

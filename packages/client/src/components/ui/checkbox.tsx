@@ -12,7 +12,6 @@ type CheckboxProps = {
     value?: string;
     onChange: (checked: CheckedState) => void;
 };
-
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
     checked,
     disabled = false,
