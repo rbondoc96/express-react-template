@@ -1,3 +1,4 @@
+import { HomeIcon } from '@radix-ui/react-icons';
 import { HTTPError } from 'ky';
 import { type ReactNode, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -19,7 +20,6 @@ export function Register(): ReactNode {
             last_name: '',
             password: '',
         },
-        // resolver: zodResolver(registerPayloadSchema),
     });
 
     const onRegister = form.handleSubmit(async (values) => {
@@ -39,41 +39,39 @@ export function Register(): ReactNode {
     });
 
     return (
-        <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2 items-center">
-                <h1 className="text-4xl font-bold">Create an account</h1>
-                <p>Please enter your details</p>
-            </div>
-            <div className="flex flex-col gap-4">
-                {formError && <AlertFromError error={formError} />}
-                <FormProvider {...form}>
-                    <form onSubmit={onRegister} className="flex flex-col gap-4">
-                        <div className="flex gap-1 *:flex-1">
-                            <FormText
-                                control={form.control}
-                                label="First Name"
-                                name="first_name"
-                                placeholder="First name"
-                            />
-                            <FormText
-                                control={form.control}
-                                label="Last Name"
-                                name="last_name"
-                                placeholder="Last name"
-                            />
-                        </div>
+        <main className="flex-1 flex flex-col justify-center gap-6 p-8">
+            <header className="flex flex-col items-center gap-4">
+                <Link to="/">
+                    <HomeIcon className="size-8" />
+                </Link>
+                <div className="flex flex-col gap-2 items-center">
+                    <h1 className="text-4xl font-bold">Create an account</h1>
+                    <p>Please enter your details</p>
+                </div>
+            </header>
+            {formError && <AlertFromError error={formError} />}
+            <FormProvider {...form}>
+                <form onSubmit={onRegister} className="flex flex-col gap-4">
+                    <div className="flex gap-1 *:flex-1">
                         <FormText
-                            type="email"
                             control={form.control}
-                            label="Username"
-                            name="username"
-                            placeholder="Username"
+                            label="First Name"
+                            name="first_name"
+                            placeholder="First name"
                         />
-                        <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
-                        <Button type="submit">Sign Up</Button>
-                    </form>
-                </FormProvider>
-            </div>
+                        <FormText control={form.control} label="Last Name" name="last_name" placeholder="Last name" />
+                    </div>
+                    <FormText
+                        type="email"
+                        control={form.control}
+                        label="Username"
+                        name="username"
+                        placeholder="Username"
+                    />
+                    <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
+                    <Button type="submit">Sign Up</Button>
+                </form>
+            </FormProvider>
             <div>
                 <p className="text-sm text-center">
                     Already have an account?{' '}
@@ -82,6 +80,6 @@ export function Register(): ReactNode {
                     </Link>
                 </p>
             </div>
-        </div>
+        </main>
     );
 }

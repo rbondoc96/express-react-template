@@ -1,9 +1,7 @@
-import { HomeIcon } from '@radix-ui/react-icons';
-import { AnimatePresence, motion } from 'framer-motion';
 import { LoaderCircle } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import { type ReactNode } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { Link } from '@/components/ui/link';
 import { useMeQuery } from '@/hooks/queries/use-me-query';
 
 export function AuthLayout(): ReactNode {
@@ -45,18 +43,7 @@ export function AuthLayout(): ReactNode {
             ) : (
                 <div className="flex min-h-screen">
                     <div className="flex-1 bg-gray-500" />
-                    <div className="flex-1">
-                        <div className="h-full p-6">
-                            <div className="flex flex-col items-center">
-                                <Link className="my-8" to="/">
-                                    <HomeIcon className="h-8 w-8" />
-                                </Link>
-                                <div className="self-stretch">
-                                    <Outlet />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Outlet />
                 </div>
             )}
         </AnimatePresence>
