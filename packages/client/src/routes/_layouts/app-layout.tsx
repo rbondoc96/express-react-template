@@ -1,56 +1,24 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import Cookies from 'js-cookie';
-import { Calendar, CircleUserRound, Home, Inbox, LoaderCircle, Search, Settings } from 'lucide-react';
-import { type ExoticComponent, type ReactNode, useMemo } from 'react';
+import { CircleUserRound, LoaderCircle } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import * as React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { AppSidebar } from '@/components/app-sidebar';
 import { Button } from '@/components/ui/button';
-import { Link } from '@/components/ui/link';
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarProvider,
-    SidebarTrigger,
-} from '@/components/ui/sidebar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { useLogoutMutation } from '@/hooks/mutations/use-logout-mutation';
 import { useMeQuery } from '@/hooks/queries/use-me-query';
 
-type Item = {
-    icon: ExoticComponent;
-    title: string;
-    url: string;
-};
-
-const items: Item[] = [
-    {
-        icon: Home,
-        title: 'Home',
-        url: '#',
-    },
-    {
-        icon: Inbox,
-        title: 'Inbox',
-        url: '#',
-    },
-    {
-        icon: Calendar,
-        title: 'Calendar',
-        url: '#',
-    },
-    {
-        icon: Search,
-        title: 'Search',
-        url: '#',
-    },
-];
-
-export function AppLayout(): ReactNode {
+export function AppLayout(): React.ReactNode {
+    const { mutateAsync: logout } = useLogoutMutation();
     const { data: user, isPending } = useMeQuery();
-    const sidebarDefaultOpen = useMemo<boolean>(() => Cookies.get('sidebar:state') === 'true', []);
+
+    const sidebarDefaultOpen = React.useMemo<boolean>(() => Cookies.get('sidebar:state') === 'true', []);
+
+    const onClickLogout = React.useCallback(async () => {
+        await logout();
+    }, [logout]);
 
     return (
         <AnimatePresence>
@@ -88,46 +56,26 @@ export function AppLayout(): ReactNode {
             ) : (
                 <SidebarProvider defaultOpen={sidebarDefaultOpen}>
                     <div className="min-h-screen flex-1 flex">
-                        <Sidebar collapsible="icon">
-                            <SidebarContent>
-                                <SidebarGroup>
-                                    <SidebarGroupContent>
-                                        <SidebarMenu>
-                                            {items.map((item) => (
-                                                <SidebarMenuItem key={item.title}>
-                                                    <SidebarMenuButton asChild>
-                                                        <Link to={item.url}>
-                                                            <item.icon />
-                                                            <span>{item.title}</span>
-                                                        </Link>
-                                                    </SidebarMenuButton>
-                                                </SidebarMenuItem>
-                                            ))}
-                                        </SidebarMenu>
-                                    </SidebarGroupContent>
-                                </SidebarGroup>
-                            </SidebarContent>
-                            <SidebarFooter>
-                                <SidebarMenu>
-                                    <SidebarMenuItem>
-                                        <SidebarMenuButton asChild>
-                                            <a href="#">
-                                                <Settings />
-                                                <span>Settings</span>
-                                            </a>
-                                        </SidebarMenuButton>
-                                    </SidebarMenuItem>
-                                </SidebarMenu>
-                            </SidebarFooter>
-                        </Sidebar>
+                        <AppSidebar />
                         <main className="flex-1">
                             <header className="border-b border-gray-300 px-3 py-2.5">
                                 <div className="flex justify-between items-center">
                                     <SidebarTrigger />
-                                    <Button className="size-7" size="icon" variant="ghost">
-                                        <CircleUserRound />
-                                        <span className="sr-only">User Menu</span>
-                                    </Button>
+                                    <Popover>
+                                        <PopoverTrigger asChild>
+                                            <Button className="size-7" size="icon" variant="ghost">
+                                                <CircleUserRound />
+                                                <span className="sr-only">User Menu</span>
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent align="end">
+                                            <div className="flex flex-col gap-4">
+                                                <Button variant="ghost" onClick={onClickLogout}>
+                                                    Log Out
+                                                </Button>
+                                            </div>
+                                        </PopoverContent>
+                                    </Popover>
                                 </div>
                             </header>
                             <div className="px-2 py-2">
