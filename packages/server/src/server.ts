@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { config } from '@/config';
 import { errorMiddleware } from '@/http/middlewares/error-middleware';
+import { logRequestMiddleware } from '@/http/middlewares/log-request-middleware';
 import { apiRouter } from '@/routes/api';
 
 export const server = express();
@@ -22,13 +23,16 @@ server.use(express.json());
 // Parse cookies in request headers
 server.use(cookieParser());
 
-server.get('/', (_req, res, _next) => {
-    res.redirect('/api/docs');
-});
+server.use(logRequestMiddleware);
 
 server.use('/api', apiRouter);
 
 server.use(errorMiddleware);
+
+// Catch-all route
+server.get('{0,}', (_req, res, _next) => {
+    res.redirect('/api/docs');
+});
 
 server.listen(port, () => {
     if (config.app.env === 'development') {
