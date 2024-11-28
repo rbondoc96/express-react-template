@@ -15,7 +15,7 @@ const SIDEBAR_COOKIE_NAME = 'sidebar:state';
 const SIDEBAR_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = '16rem';
 const SIDEBAR_WIDTH_MOBILE = '18rem';
-const SIDEBAR_WIDTH_ICON = '3.2rem';
+const SIDEBAR_WIDTH_ICON = '4.2rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 
 type SidebarContextState = {
@@ -272,6 +272,31 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 Sidebar.displayName = 'Sidebar';
 
 /**
+ * Scrollable content
+ */
+export const SidebarContent = React.forwardRef<HTMLDivElement, HtmlProps<'div'>>(
+    ({ children, className, ...props }, ref) => {
+        return (
+            <div
+                data-sidebar="content"
+                className={cn(
+                    'overflow-auto',
+                    'flex-1 flex flex-col gap-2',
+                    'min-h-0',
+                    'group-data-[collapsible=icon]:overflow-hidden',
+                    className,
+                )}
+                ref={ref}
+                {...props}
+            >
+                {children}
+            </div>
+        );
+    },
+);
+SidebarContent.displayName = 'SidebarContent';
+
+/**
  * Section within the `SidebarContent`
  */
 export const SidebarGroup = React.forwardRef<HTMLDivElement, HtmlProps<'div'>>(
@@ -380,7 +405,7 @@ export const SidebarTrigger = React.forwardRef<React.ElementRef<typeof Button>, 
         return (
             <Button
                 data-sidebar="trigger"
-                className={cn('size-7', className)}
+                className={className}
                 ref={ref}
                 size="icon"
                 variant="ghost"
@@ -844,28 +869,3 @@ export const SidebarSeparator = React.forwardRef<React.ElementRef<typeof Separat
     },
 );
 SidebarSeparator.displayName = 'SidebarSeparator';
-
-/**
- * Scrollable content
- */
-export const SidebarContent = React.forwardRef<HTMLDivElement, HtmlProps<'div'>>(
-    ({ children, className, ...props }, ref) => {
-        return (
-            <div
-                data-sidebar="content"
-                className={cn(
-                    'overflow-auto',
-                    'flex-1 flex flex-col gap-2',
-                    'min-h-0',
-                    'group-data-[collapsible=icon]:overflow-hidden',
-                    className,
-                )}
-                ref={ref}
-                {...props}
-            >
-                {children}
-            </div>
-        );
-    },
-);
-SidebarContent.displayName = 'SidebarContent';

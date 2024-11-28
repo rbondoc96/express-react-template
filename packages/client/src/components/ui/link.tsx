@@ -6,7 +6,7 @@ import { SolidButton } from '@/components/buttons/solid-button';
 import { HtmlProps } from '@/components/types';
 import { cn } from '@/utilities/cn';
 
-const styles = cva(['text-accent-foreground hover:underline'], {
+const styles = cva(['text-accent-foreground'], {
     variants: {
         variant: {
             'icon-button': ['hover:no-underline'],

@@ -57,13 +57,13 @@ export function AppLayout(): React.ReactNode {
                 <SidebarProvider defaultOpen={sidebarDefaultOpen}>
                     <div className="min-h-screen flex-1 flex">
                         <AppSidebar />
-                        <main className="flex-1">
-                            <header className="border-b border-gray-300 px-3 py-2.5">
+                        <div className="flex-1">
+                            <header className="border-b border-black px-3 py-3">
                                 <div className="flex justify-between items-center">
                                     <SidebarTrigger />
                                     <Popover>
                                         <PopoverTrigger asChild>
-                                            <Button className="size-7" size="icon" variant="ghost">
+                                            <Button size="icon" variant="ghost">
                                                 <CircleUserRound />
                                                 <span className="sr-only">User Menu</span>
                                             </Button>
@@ -78,10 +78,10 @@ export function AppLayout(): React.ReactNode {
                                     </Popover>
                                 </div>
                             </header>
-                            <div className="px-2 py-2">
+                            <div className="px-3 py-2">
                                 <Outlet />
                             </div>
-                        </main>
+                        </div>
                     </div>
                 </SidebarProvider>
             )}

@@ -22,7 +22,7 @@ const items: Item[] = [
     {
         icon: Home,
         title: 'Home',
-        url: '#',
+        url: '/dashboard',
     },
     {
         icon: Inbox,
@@ -45,9 +45,9 @@ export function AppSidebar(): React.ReactNode {
     return (
         <Sidebar collapsible="icon">
             <SidebarContent>
-                <SidebarGroup>
+                <SidebarGroup className="p-4">
                     <SidebarGroupContent>
-                        <SidebarMenu>
+                        <SidebarMenu className="gap-2">
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
@@ -62,14 +62,14 @@ export function AppSidebar(): React.ReactNode {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter>
+            <SidebarFooter className="p-4">
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <a href="#">
+                            <Link href="#">
                                 <Settings />
                                 <span>Settings</span>
-                            </a>
+                            </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
