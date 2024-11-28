@@ -1,3 +1,4 @@
+import { Role } from '@common/enums/Role';
 import bcrypt from 'bcryptjs';
 import { type ColumnType, type Insertable, type Selectable, type Updateable } from 'kysely';
 import { DateTime } from 'luxon';
@@ -11,6 +12,7 @@ export type UserTable = {
     first_name: string;
     last_name: string;
     password: string;
+    role: Role;
     last_signed_in_at: ColumnType<Date, string | undefined, string>;
     created_at: ColumnType<Date, never, never>;
     updated_at: ColumnType<Date, never, string>;
