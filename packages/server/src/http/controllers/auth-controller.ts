@@ -1,25 +1,14 @@
 import bcrypt from 'bcryptjs';
 import { Router } from 'express';
 import { DateTime } from 'luxon';
-import { coerce, object, string } from 'zod';
-import {
-    userCount,
-    userCreate,
-    userFindByUsername,
-    userSelectQuery,
-    userUpdate,
-} from '@/database/repositories/user-repository';
+import { object, string } from 'zod';
+import { userCreate, userFindByUsername, userUpdate } from '@/database/repositories/user-repository';
 import { BadRequestException } from '@/exceptions/bad-request-exception';
 import { NotAuthenticatedException } from '@/exceptions/not-authenticated-exception';
 import { ValidationException } from '@/exceptions/validation-exception';
 import { authMiddleware } from '@/http/middlewares/auth-middleware';
 import { UserResource } from '@/http/resources/user-resource';
 import { createJwt } from '@/utilities/auth';
-
-const paginationQueryParams = object({
-    page: coerce.number().default(1),
-    per_page: coerce.number().default(10),
-});
 
 const loginPayload = object({
     username: string().min(1, {
@@ -138,32 +127,4 @@ authController.post('/register', async (req, res, next) => {
     const jwt = createJwt(user);
 
     res.status(201).cookie('jwt', jwt, { httpOnly: true, secure: true, sameSite: 'none' }).json(responseData);
-});
-
-authController.get('/users', authMiddleware, async (req, res, next) => {
-    const result = paginationQueryParams.safeParse(req.query);
-
-    if (!result.success) {
-        next(new Error('Invalid query params'));
-        return;
-    }
-
-    const query = result.data;
-    const count = await userCount();
-
-    const users = await userSelectQuery()
-        .selectAll()
-        .offset(query.page - 1)
-        .limit(query.per_page)
-        .execute();
-
-    const responseData = new UserResource(users)
-        .base()
-        .pagination(count, {
-            page: query.page,
-            per_page: query.per_page,
-        })
-        .create();
-
-    res.status(200).json(responseData);
 });
