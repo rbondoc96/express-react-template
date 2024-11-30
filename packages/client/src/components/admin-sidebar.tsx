@@ -1,4 +1,4 @@
-import { Home, LayoutDashboard, Settings } from 'lucide-react';
+import { Home, LayoutDashboard, Settings, Users } from 'lucide-react';
 import * as React from 'react';
 import { Link } from '@/components/ui/link';
 import {
@@ -24,6 +24,14 @@ export function AdminSidebar(): React.ReactNode {
                                     <Link to="/admin">
                                         <Home />
                                         <span>Home</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link to="/admin/users">
+                                        <Users />
+                                        <span>Users</span>
                                     </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>

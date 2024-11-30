@@ -1,29 +1,8 @@
 import { type ReactNode } from 'react';
-import { client } from '@/api/client';
-import { SolidButton } from '@/components/buttons/solid-button';
 import { Link } from '@/components/ui/link';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export function Root(): ReactNode {
-    const getUsers = async () => {
-        const api = client();
-
-        try {
-            const responseData = await api
-                .get('api/auth/users', {
-                    searchParams: {
-                        page: 1,
-                        per_page: 10,
-                    },
-                })
-                .json();
-
-            console.log(responseData);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     return (
         <div className="container flex flex-col justify-between px-8">
             <header className="my-6">
@@ -43,7 +22,6 @@ export function Root(): ReactNode {
                     <Link to="/login" variant="solid-button">
                         Login
                     </Link>
-                    <SolidButton onClick={getUsers}>Get Users</SolidButton>
                 </div>
             </main>
         </div>
