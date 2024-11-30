@@ -10,6 +10,7 @@ function Route<P extends string>(name: symbol, path: P): RouteName<P> {
     };
 }
 
+export const ROUTE_ADMIN_DASHBOARD = Route(Symbol('admin'), '/admin');
 export const ROUTE_DASHBOARD = Route(Symbol('dashboard'), '/dashboard');
 export const ROUTE_LOGIN = Route(Symbol('login'), '/login');
 export const ROUTE_REGISTER = Route(Symbol('register'), '/register');

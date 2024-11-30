@@ -1,4 +1,5 @@
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
+import { Permission } from '@common/enums/Permission';
+import { Calendar, Home, Inbox, Layers, Search, Settings } from 'lucide-react';
 import * as React from 'react';
 import { Link } from '@/components/ui/link';
 import {
@@ -11,6 +12,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useHasPermission } from '@/hooks/use-has-permission';
 
 type Item = {
     icon: React.ExoticComponent;
@@ -42,6 +44,8 @@ const items: Item[] = [
 ];
 
 export function AppSidebar(): React.ReactNode {
+    const canViewAdminPanel = useHasPermission(Permission.AccessAdminPanel);
+
     return (
         <Sidebar collapsible="icon">
             <SidebarContent>
@@ -63,7 +67,17 @@ export function AppSidebar(): React.ReactNode {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="p-4">
-                <SidebarMenu>
+                <SidebarMenu className="gap-2">
+                    {canViewAdminPanel && (
+                        <SidebarMenuItem>
+                            <SidebarMenuButton asChild>
+                                <Link to="/admin">
+                                    <Layers />
+                                    <span>Admin Panel</span>
+                                </Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    )}
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/settings">
