@@ -4,6 +4,7 @@ import { type ColumnType, type Insertable, type Selectable, type Updateable } fr
 import { DateTime } from 'luxon';
 import { ulid } from 'ulid';
 import { db } from '@/database/db';
+import { roles } from '@/rbac/roles';
 
 export type UserTable = {
     id: ColumnType<number, never, never>;
@@ -12,7 +13,7 @@ export type UserTable = {
     first_name: string;
     last_name: string;
     password: string;
-    role: Role;
+    role: ColumnType<Role, Role | undefined, Role>;
     last_signed_in_at: ColumnType<Date, string | undefined, string>;
     created_at: ColumnType<Date, never, never>;
     updated_at: ColumnType<Date, never, string>;
@@ -80,4 +81,8 @@ export async function userUpdate(user: UserSelect, data: UserUpdate) {
         })
         .where('ulid', '=', user.ulid)
         .executeTakeFirstOrThrow();
+}
+
+export function userGetPermissions(user: UserSelect) {
+    return roles[user.role];
 }
