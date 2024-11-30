@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ApplicationShell } from '@/components/shells/application-shell';
-import { UserListItem } from '@/components/ui/user-list-item';
+import { UserListItem } from '@/components/user-list-item';
 import { useUserListSuspenseQuery } from '@/hooks/queries/use-user-list-query';
 
 export function AdminUsers(): React.ReactNode {
