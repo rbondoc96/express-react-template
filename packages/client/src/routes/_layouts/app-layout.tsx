@@ -1,24 +1,16 @@
 import Cookies from 'js-cookie';
-import { CircleUserRound, LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { AppSidebar } from '@/components/app-sidebar';
-import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { useLogoutMutation } from '@/hooks/mutations/use-logout-mutation';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { useMeQuery } from '@/hooks/queries/use-me-query';
 
 export function AppLayout(): React.ReactNode {
-    const { mutateAsync: logout } = useLogoutMutation();
     const { data: user, isPending } = useMeQuery();
 
     const sidebarDefaultOpen = React.useMemo<boolean>(() => Cookies.get('sidebar:state') === 'true', []);
-
-    const onClickLogout = React.useCallback(async () => {
-        await logout();
-    }, [logout]);
 
     return (
         <AnimatePresence>
@@ -58,29 +50,7 @@ export function AppLayout(): React.ReactNode {
                     <div className="min-h-screen flex-1 flex">
                         <AppSidebar />
                         <div className="flex-1">
-                            <header className="border-b border-black px-3 py-3">
-                                <div className="flex justify-between items-center">
-                                    <SidebarTrigger />
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <Button size="icon" variant="ghost">
-                                                <CircleUserRound />
-                                                <span className="sr-only">User Menu</span>
-                                            </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent align="end">
-                                            <div className="flex flex-col gap-4">
-                                                <Button variant="ghost" onClick={onClickLogout}>
-                                                    Log Out
-                                                </Button>
-                                            </div>
-                                        </PopoverContent>
-                                    </Popover>
-                                </div>
-                            </header>
-                            <div className="px-3 py-2">
-                                <Outlet />
-                            </div>
+                            <Outlet />
                         </div>
                     </div>
                 </SidebarProvider>

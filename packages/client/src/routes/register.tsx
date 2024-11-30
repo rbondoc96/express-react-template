@@ -61,13 +61,7 @@ export function Register(): ReactNode {
                         />
                         <FormText control={form.control} label="Last Name" name="last_name" placeholder="Last name" />
                     </div>
-                    <FormText
-                        type="email"
-                        control={form.control}
-                        label="Username"
-                        name="username"
-                        placeholder="Username"
-                    />
+                    <FormText control={form.control} label="Username" name="username" placeholder="Username" />
                     <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
                     <Button type="submit">Sign Up</Button>
                 </form>
