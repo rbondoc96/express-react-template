@@ -1,4 +1,6 @@
-import { object, type output, string } from 'zod';
+import { Permission } from '@common/enums/Permission';
+import { Role } from '@common/enums/Role';
+import { array, nativeEnum, object, type output, string } from 'zod';
 import { dateStringToDateTime, nullableStringToDateTime } from '@/api/parsers/utilities/dateStringToDateTime';
 
 export const userParser = object({
@@ -7,6 +9,8 @@ export const userParser = object({
     id: string(),
     last_name: string(),
     last_signed_in_at: nullableStringToDateTime(),
+    role: nativeEnum(Role),
+    permissions: array(nativeEnum(Permission)),
     updated_at: dateStringToDateTime(),
     username: string(),
 });
