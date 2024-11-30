@@ -55,7 +55,15 @@ export function AdminLayout(): React.ReactNode {
                     <div className="min-h-screen flex-1 flex">
                         <AdminSidebar />
                         <div className="flex-1">
-                            <Outlet />
+                            <React.Suspense
+                                fallback={
+                                    <div className="h-full flex flex-col items-center justify-center">
+                                        <LoaderCircle className="animate-spin text-black size-8" />
+                                    </div>
+                                }
+                            >
+                                <Outlet />
+                            </React.Suspense>
                         </div>
                     </div>
                 </SidebarProvider>
