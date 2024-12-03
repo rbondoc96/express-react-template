@@ -14,8 +14,8 @@ export function UserListItem({ user }: UserListItemProps): React.ReactNode {
     const [openEditUser, setOpenEditUser] = React.useState(false);
 
     return (
-        <div className="flex items-center bg-gray-50 rounded px-4 py-2.5" key={user.id}>
-            <div className="flex-1 grid grid-cols-5 items-center">
+        <div className="relative flex items-center bg-gray-50 rounded px-4 py-2.5" key={user.id}>
+            <div className="flex-1 grid grid-cols-5 items-center text-sm">
                 <div className="flex items-center gap-3">
                     <Avatar user={user} />
                     <span>{`${user.first_name} ${user.last_name}`}</span>
@@ -27,8 +27,8 @@ export function UserListItem({ user }: UserListItemProps): React.ReactNode {
             </div>
             <Popover>
                 <PopoverTrigger asChild>
-                    <Button size="icon" variant="ghost">
-                        <EllipsisVertical className="size-4" />
+                    <Button className="absolute right-0 h-8 w-8 [&_svg]:size-4" size="icon" variant="ghost">
+                        <EllipsisVertical />
                         <span className="sr-only">Manage User</span>
                     </Button>
                 </PopoverTrigger>
