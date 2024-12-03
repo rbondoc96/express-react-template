@@ -72,7 +72,7 @@ export function userSelectQuery() {
     return db.selectFrom('users');
 }
 
-export async function userUpdate(user: UserSelect, data: UserUpdate) {
+export async function userUpdate(user: UserSelect, data: UserUpdate): Promise<UserSelect> {
     return db
         .updateTable('users')
         .set({
@@ -80,6 +80,7 @@ export async function userUpdate(user: UserSelect, data: UserUpdate) {
             updated_at: DateTime.now().toUTC().toISO(),
         })
         .where('ulid', '=', user.ulid)
+        .returningAll()
         .executeTakeFirstOrThrow();
 }
 
