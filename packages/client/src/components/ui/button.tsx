@@ -1,12 +1,14 @@
-import { Slot } from '@radix-ui/react-slot';
+import { Slot, Slottable } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { LoaderCircle } from 'lucide-react';
 import * as React from 'react';
 import { type HtmlProps } from '@/components/types';
 import { cn } from '@/utilities/cn';
 
 const styles = cva(
     [
-        'inline-flex items-center justify-center gap-2',
+        'relative',
+        'inline-flex items-center justify-center',
         'whitespace-nowrap',
         'rounded-md',
         'text-sm font-medium',
@@ -42,15 +44,24 @@ const styles = cva(
 export type ButtonProps = HtmlProps<'button'> &
     VariantProps<typeof styles> & {
         asChild?: boolean;
+        loading?: boolean;
     };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ children, className, variant, size, asChild = false, ...props }, ref) => {
+    ({ asChild = false, children, className, loading, size, variant, ...props }, ref) => {
         const Component = asChild ? Slot : 'button';
 
         return (
             <Component className={cn(styles({ variant, size }), className)} ref={ref} {...props}>
-                {children}
+                {loading && (
+                    <span className={cn('absolute top-1/2 left-1/2', 'transform -translate-x-1/2 -translate-y-1/2')}>
+                        <LoaderCircle className="animate-spin size-4" />
+                        <span className="sr-only">Loading</span>
+                    </span>
+                )}
+                <div className={cn('inline-flex items-center justify-center gap-2', loading && 'text-transparent')}>
+                    <Slottable>{children}</Slottable>
+                </div>
             </Component>
         );
     },

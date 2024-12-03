@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { array } from 'zod';
 import { client } from '@/api/client';
 import { userParser } from '@/api/parsers/userParser';
@@ -23,6 +23,16 @@ function userListQueryFn(queryParams: PaginationParams) {
         await new Promise((resolve) => setTimeout(resolve, 2000));
         const data = await api.get('api/users', { searchParams }).json();
         return unwrap(array(userParser)).parse(data);
+    };
+}
+
+export function useInvalidateUserListQueries() {
+    const queryClient = useQueryClient();
+
+    return async () => {
+        await queryClient.invalidateQueries({
+            queryKey: userListQueryKey({}),
+        });
     };
 }
 

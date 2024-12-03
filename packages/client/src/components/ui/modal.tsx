@@ -23,19 +23,12 @@ export function Modal({ children, open, onOpenChange }: ModalProps): React.React
     );
 }
 
-type ModalContent = React.PropsWithChildren<{
-    className?: string;
-}>;
-export function ModalContent({ children, className }: ModalContent): React.ReactNode {
-    return <div className={cn('my-2', className)}>{children}</div>;
-}
-
 type ModalFooterProps = React.PropsWithChildren<{
     className?: string;
 }>;
 export function ModalFooter({ children, className }: ModalFooterProps): React.ReactNode {
     return (
-        <DialogFooter className={cn('sm:justify-start', className)}>
+        <DialogFooter className={cn('sm:justify-between', className)}>
             <DialogClose asChild>
                 <Button type="button" variant="secondary">
                     Close
