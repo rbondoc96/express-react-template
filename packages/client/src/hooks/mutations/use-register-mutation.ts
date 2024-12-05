@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { object, type output, string } from 'zod';
 import { client } from '@/api/client';
-import { userParser } from '@/api/parsers/userParser';
-import { unwrap } from '@/api/parsers/utilities/unwrap';
+import { userValidator } from '@/api/validators/user-validator';
+import { unwrap } from '@/api/validators/utilities/unwrap';
 import { setMeQueryData } from '@/hooks/queries/use-me-query';
 
 export const registerPayloadSchema = object({
@@ -27,7 +27,7 @@ export function useRegisterMutation() {
                 })
                 .json();
 
-            return unwrap(userParser).parse(data);
+            return unwrap(userValidator).parse(data);
         },
         onSuccess: async (data) => {
             setMeQueryData(queryClient, data);

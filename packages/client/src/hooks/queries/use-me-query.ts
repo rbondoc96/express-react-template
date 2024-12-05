@@ -1,7 +1,7 @@
 import { type QueryClient, useQuery } from '@tanstack/react-query';
 import { client } from '@/api/client';
-import { type User, userParser } from '@/api/parsers/userParser';
-import { unwrap } from '@/api/parsers/utilities/unwrap';
+import { type User, userValidator } from '@/api/validators/user-validator';
+import { unwrap } from '@/api/validators/utilities/unwrap';
 
 const meQueryKey = () => ['me'] as const;
 
@@ -23,7 +23,7 @@ export function useMeQuery() {
 
             try {
                 const data = await api.get('api/auth').json();
-                return unwrap(userParser).parse(data);
+                return unwrap(userValidator).parse(data);
             } catch (error) {
                 console.error(error);
                 return null;

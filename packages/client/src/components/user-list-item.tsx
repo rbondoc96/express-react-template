@@ -1,6 +1,6 @@
 import { EllipsisVertical, UserRoundPen } from 'lucide-react';
 import * as React from 'react';
-import { User } from '@/api/parsers/userParser';
+import { User } from '@/api/validators/user-validator';
 import { EditUserModal } from '@/components/edit-user-modal';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';

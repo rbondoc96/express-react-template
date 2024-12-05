@@ -1,9 +1,9 @@
 import { Permission } from '@common/enums/Permission';
 import { Role } from '@common/enums/Role';
 import { array, nativeEnum, object, type output, string } from 'zod';
-import { dateStringToDateTime, nullableStringToDateTime } from '@/api/parsers/utilities/dateStringToDateTime';
+import { dateStringToDateTime, nullableStringToDateTime } from '@/api/validators/utilities/dates';
 
-export const userParser = object({
+export const userValidator = object({
     created_at: dateStringToDateTime(),
     first_name: string(),
     id: string(),
@@ -15,4 +15,4 @@ export const userParser = object({
     username: string(),
 });
 
-export type User = output<typeof userParser>;
+export type User = output<typeof userValidator>;

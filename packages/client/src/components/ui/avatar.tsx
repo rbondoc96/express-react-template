@@ -2,7 +2,7 @@ import { createAvatar } from '@dicebear/core';
 import * as initials from '@dicebear/initials';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import * as React from 'react';
-import { type User } from '@/api/parsers/userParser';
+import { type User } from '@/api/validators/user-validator';
 import { cn } from '@/utilities/cn';
 
 type AvatarProps = Omit<AvatarPrimitive.AvatarProps, 'children'> & {

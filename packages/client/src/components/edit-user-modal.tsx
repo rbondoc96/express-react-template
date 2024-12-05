@@ -1,7 +1,7 @@
 import { HTTPError } from 'ky';
 import * as React from 'react';
 import { FormProvider } from 'react-hook-form';
-import { User } from '@/api/parsers/userParser';
+import { User } from '@/api/validators/user-validator';
 import { useFormControls } from '@/components/hooks/use-form-controls';
 import { AlertFromError } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';

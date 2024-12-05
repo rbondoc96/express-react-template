@@ -1,8 +1,8 @@
 import { Role } from '@common/enums/Role';
 import { useMutation } from '@tanstack/react-query';
 import { client } from '@/api/client';
-import { User, userParser } from '@/api/parsers/userParser';
-import { unwrap } from '@/api/parsers/utilities/unwrap';
+import { User, userValidator } from '@/api/validators/user-validator';
+import { unwrap } from '@/api/validators/utilities/unwrap';
 import { useInvalidateUserListQueries } from '@/hooks/queries/use-user-list-query';
 
 export type UserUpdatePayload = Partial<{
@@ -30,7 +30,7 @@ export function useUserUpdateMutation() {
             });
             const payload = await response.json();
 
-            return unwrap(userParser).parse(payload);
+            return unwrap(userValidator).parse(payload);
         },
         onSuccess: async () => {
             await invalidateUserListQueries();
