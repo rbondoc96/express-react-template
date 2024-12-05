@@ -54,7 +54,8 @@ authController.get('/', authMiddleware, async (req, res, next) => {
     }
 
     const responseData = new UserResource(user).base().create();
-    res.status(200).json(responseData);
+    const jwt = createJwt(user);
+    res.status(200).cookie(JwtCookieMeta.name, jwt, JwtCookieMeta.options).json(responseData);
 });
 
 authController.delete('/', async (_req, res, _next) => {
