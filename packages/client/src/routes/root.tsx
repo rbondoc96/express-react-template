@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Button } from '@/components/ui/button';
 import { Link } from '@/components/ui/link';
 
 export function Root(): ReactNode {
@@ -21,9 +22,9 @@ export function Root(): ReactNode {
                         <p className="text-xl">A template for projects written with React and Express.</p>
                     </div>
                     <div className="flex justify-center">
-                        <Link to="/register" variant="solid-button">
-                            Get started
-                        </Link>
+                        <Button asChild>
+                            <Link to="/register">Get started</Link>
+                        </Button>
                     </div>
                 </div>
             </main>

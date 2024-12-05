@@ -52,16 +52,23 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         const Component = asChild ? Slot : 'button';
 
         return (
-            <Component className={cn(styles({ variant, size }), className)} ref={ref} {...props}>
+            <Component
+                className={cn(
+                    styles({ variant, size }),
+                    'inline-flex items-center justify-center gap-2',
+                    loading && 'text-transparent',
+                    className,
+                )}
+                ref={ref}
+                {...props}
+            >
+                <Slottable>{children}</Slottable>
                 {loading && (
-                    <span className={cn('absolute top-1/2 left-1/2', 'transform -translate-x-1/2 -translate-y-1/2')}>
-                        <LoaderCircle className="animate-spin size-4" />
+                    <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <LoaderCircle className="animate-spin size-4 text-white" />
                         <span className="sr-only">Loading</span>
                     </span>
                 )}
-                <div className={cn('inline-flex items-center justify-center gap-2', loading && 'text-transparent')}>
-                    <Slottable>{children}</Slottable>
-                </div>
             </Component>
         );
     },
