@@ -1,6 +1,5 @@
 import { type ReactNode } from 'react';
 import { Link } from '@/components/ui/link';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export function Root(): ReactNode {
     return (
@@ -8,7 +7,6 @@ export function Root(): ReactNode {
             <header className="my-6">
                 <div className="flex justify-between">
                     <Link to="/">Home</Link>
-                    <ThemeToggle />
                 </div>
             </header>
             <main>
