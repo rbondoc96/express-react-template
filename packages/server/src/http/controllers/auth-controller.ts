@@ -8,7 +8,7 @@ import { NotAuthenticatedException } from '@/exceptions/not-authenticated-except
 import { ValidationException } from '@/exceptions/validation-exception';
 import { authMiddleware } from '@/http/middlewares/auth-middleware';
 import { UserResource } from '@/http/resources/user-resource';
-import { createJwt } from '@/utilities/auth';
+import { createJwt, JwtCookieMeta } from '@/utilities/auth';
 
 const loginPayload = object({
     username: string().min(1, {
@@ -48,7 +48,7 @@ authController.get('/', authMiddleware, async (req, res, next) => {
     const user = req.user;
 
     if (!user) {
-        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
+        res.clearCookie(JwtCookieMeta.name, JwtCookieMeta.options);
         next(new NotAuthenticatedException());
         return;
     }
@@ -58,7 +58,7 @@ authController.get('/', authMiddleware, async (req, res, next) => {
 });
 
 authController.delete('/', async (_req, res, _next) => {
-    res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true }).sendStatus(204);
+    res.clearCookie(JwtCookieMeta.name, JwtCookieMeta.options).sendStatus(204);
 });
 
 authController.post('/login', async (req, res, next) => {
@@ -91,13 +91,7 @@ authController.post('/login', async (req, res, next) => {
     const responseData = new UserResource(user).base().create();
     const jwt = createJwt(user);
 
-    res.status(200)
-        .cookie('jwt', jwt, {
-            httpOnly: true,
-            sameSite: 'none',
-            secure: true,
-        })
-        .json(responseData);
+    res.status(200).cookie(JwtCookieMeta.name, jwt, JwtCookieMeta.options).json(responseData);
 });
 
 authController.post('/register', async (req, res, next) => {
@@ -126,5 +120,5 @@ authController.post('/register', async (req, res, next) => {
     const responseData = new UserResource(user).base().create();
     const jwt = createJwt(user);
 
-    res.status(201).cookie('jwt', jwt, { httpOnly: true, secure: true, sameSite: 'none' }).json(responseData);
+    res.status(201).cookie(JwtCookieMeta.name, jwt, JwtCookieMeta.options).json(responseData);
 });

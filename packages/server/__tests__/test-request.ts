@@ -3,7 +3,7 @@ import type TestAgent from 'supertest/lib/agent';
 import { type App } from 'supertest/types';
 import { TestResponse } from '@tests/test-response';
 import { UserSelect } from '@/database/repositories/user-repository';
-import { createJwt, type CreateJwtOptions } from '@/utilities/auth';
+import { createJwt, type CreateJwtOptions, JwtCookieMeta } from '@/utilities/auth';
 
 export class TestRequest {
     private cookies: Record<string, string> = {};
@@ -34,7 +34,7 @@ export class TestRequest {
     public actingAs(user: UserSelect, options?: CreateJwtOptions): this {
         const jwt = createJwt(user, options);
 
-        this.withCookie('jwt', jwt);
+        this.withCookie(JwtCookieMeta.name, jwt);
 
         return this;
     }

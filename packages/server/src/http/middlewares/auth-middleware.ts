@@ -4,6 +4,7 @@ import { number, object, string } from 'zod';
 import { config } from '@/config';
 import { userFindByUlid } from '@/database/repositories/user-repository';
 import { NotAuthenticatedException } from '@/exceptions/not-authenticated-exception';
+import { JwtCookieMeta } from '@/utilities/auth';
 
 const tokenPayloadSchema = object({
     sub: string(),
@@ -16,10 +17,10 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
         return;
     }
 
-    const jwt = req.cookies['jwt'];
+    const jwt = req.cookies[JwtCookieMeta.name];
 
     if (typeof jwt !== 'string') {
-        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
+        res.clearCookie(JwtCookieMeta.name, JwtCookieMeta.options);
         next(new NotAuthenticatedException());
         return;
     }
@@ -28,7 +29,7 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
         const payload = jsonwebtoken.verify(jwt, config.auth.jwt_public_key);
 
         if (typeof payload === 'string') {
-            res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
+            res.clearCookie(JwtCookieMeta.name, JwtCookieMeta.options);
             next(new NotAuthenticatedException());
             return;
         }
@@ -38,7 +39,7 @@ export const authMiddleware: RequestHandler = async (req: Request, res, next) =>
 
         next();
     } catch (error) {
-        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
+        res.clearCookie(JwtCookieMeta.name, JwtCookieMeta.options);
 
         if (error instanceof jsonwebtoken.TokenExpiredError) {
             next(new NotAuthenticatedException());
