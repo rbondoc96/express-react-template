@@ -74,7 +74,7 @@ export const SheetContent = React.forwardRef<React.ElementRef<typeof DialogPrimi
                             'opacity-70',
                             'transition-opacity',
                             'hover:opacity-100',
-                            'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+                            'focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2',
                             'disabled:pointer-events-none',
                             'data-[state=open]:bg-secondary',
                         )}

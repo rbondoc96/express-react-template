@@ -215,8 +215,8 @@ export function FormPassword<
                 {(field) => (
                     <input
                         className={cn(
-                            'flex h-9 w-full px-3 py-1 shadow-sm transition-colors',
-                            'border border-input rounded-md file:border-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+                            'flex h-9 w-full px-3 py-1 shadow-xs transition-colors',
+                            'border border-input rounded-md file:border-0 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring',
                             'text-sm file:text-sm file:font-medium placeholder:text-muted-foreground',
                             'disabled:cursor-not-allowed disabled:opacity-50',
                         )}
@@ -265,8 +265,8 @@ export function FormText<
             {(field) => (
                 <input
                     className={cn(
-                        'flex h-9 w-full px-3 py-1 shadow-sm transition-colors',
-                        'border border-input rounded-md file:border-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+                        'flex h-9 w-full px-3 py-1 shadow-xs transition-colors',
+                        'border border-input rounded-md file:border-0 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring',
                         'text-sm file:text-sm file:font-medium placeholder:text-muted-foreground',
                         'disabled:cursor-not-allowed disabled:opacity-50',
                     )}

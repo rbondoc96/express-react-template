@@ -11,7 +11,7 @@ export function AuthLayout(): ReactNode {
         <AnimatePresence>
             {isPending && (
                 <motion.div
-                    className="fixed inset-0 bg-transparent z-[9999]"
+                    className="fixed inset-0 bg-transparent z-9999"
                     key="splash-loader"
                     exit={{
                         opacity: 0,
@@ -28,7 +28,7 @@ export function AuthLayout(): ReactNode {
             )}
             {isPending ? (
                 <motion.div
-                    className="fixed inset-0 bg-background z-[9998]"
+                    className="fixed inset-0 bg-background z-9998"
                     key="splash"
                     exit={{
                         opacity: 0,
