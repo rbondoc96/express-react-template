@@ -40,6 +40,15 @@ const registerPayload = object({
     }).min(1, {
         message: 'The password field is required.',
     }),
+    password_confirmation: string(),
+}).superRefine(({ password, password_confirmation }, ctx) => {
+    if (password !== password_confirmation) {
+        ctx.addIssue({
+            code: 'custom',
+            message: 'The passwords do not match.',
+            path: ['password_confirmation'],
+        });
+    }
 });
 
 export const authController = Router();

@@ -11,7 +11,7 @@ import { ValidationHttpError } from '@/errors/validation-http-error';
 import { useRegisterMutation } from '@/hooks/mutations/use-register-mutation';
 
 export function Register(): ReactNode {
-    const { mutateAsync: register } = useRegisterMutation();
+    const { mutateAsync: register, isPending } = useRegisterMutation();
     const [formError, setFormError] = useState<HTTPError>();
 
     const { form, setFormErrors } = useFormControls({
@@ -20,6 +20,7 @@ export function Register(): ReactNode {
             first_name: '',
             last_name: '',
             password: '',
+            password_confirmation: '',
         },
     });
 
@@ -63,8 +64,16 @@ export function Register(): ReactNode {
                         <FormText control={form.control} label="Last Name" name="last_name" placeholder="Last name" />
                     </div>
                     <FormText control={form.control} label="Username" name="username" placeholder="Username" />
-                    <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
-                    <Button type="submit">Sign Up</Button>
+                    <FormPassword control={form.control} label="Password" name="password" placeholder="********" />
+                    <FormPassword
+                        control={form.control}
+                        label="Confirm Password"
+                        name="password_confirmation"
+                        placeholder="********"
+                    />
+                    <Button type="submit" loading={isPending}>
+                        Sign Up
+                    </Button>
                 </form>
             </FormProvider>
             <div>
