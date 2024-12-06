@@ -1,19 +1,20 @@
 import { HomeIcon } from '@radix-ui/react-icons';
 import { HTTPError } from 'ky';
 import { type ReactNode, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
+import { useFormControls } from '@/components/hooks/use-form-controls';
 import { AlertFromError } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { FormPassword, FormText } from '@/components/ui/form';
 import { Link } from '@/components/ui/link';
 import { ValidationHttpError } from '@/errors/validation-http-error';
-import { type RegisterPayload, useRegisterMutation } from '@/hooks/mutations/use-register-mutation';
+import { useRegisterMutation } from '@/hooks/mutations/use-register-mutation';
 
 export function Register(): ReactNode {
     const { mutateAsync: register } = useRegisterMutation();
     const [formError, setFormError] = useState<HTTPError>();
 
-    const form = useForm<RegisterPayload>({
+    const { form, setFormErrors } = useFormControls({
         defaultValues: {
             username: '',
             first_name: '',
@@ -23,13 +24,13 @@ export function Register(): ReactNode {
     });
 
     const onRegister = form.handleSubmit(async (values) => {
+        setFormError(undefined);
+
         try {
             await register(values);
         } catch (error) {
             if (error instanceof ValidationHttpError) {
-                Object.entries(error.messages).forEach(([name, message]) => {
-                    form.setError(name as keyof RegisterPayload, { type: 'custom', message });
-                });
+                setFormErrors(error);
             } else if (error instanceof HTTPError) {
                 setFormError(error);
             }
@@ -45,14 +46,14 @@ export function Register(): ReactNode {
                     <HomeIcon className="size-8" />
                 </Link>
                 <div className="flex flex-col gap-2 items-center">
-                    <h1 className="text-4xl font-bold">Create an account</h1>
-                    <p>Please enter your details</p>
+                    <h1 className="text-3xl font-bold">Create an account</h1>
+                    <p className="text-gray-500">Enter your information below to create an account.</p>
                 </div>
             </header>
             {formError && <AlertFromError error={formError} />}
             <FormProvider {...form}>
                 <form onSubmit={onRegister} className="flex flex-col gap-4">
-                    <div className="flex gap-1 *:flex-1">
+                    <div className="flex gap-2 *:flex-1">
                         <FormText
                             control={form.control}
                             label="First Name"

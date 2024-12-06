@@ -1,18 +1,20 @@
 import { HomeIcon } from '@radix-ui/react-icons';
 import { HTTPError } from 'ky';
 import { type ReactNode, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
+import { useFormControls } from '@/components/hooks/use-form-controls';
 import { AlertFromError } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { FormPassword, FormText } from '@/components/ui/form';
 import { Link } from '@/components/ui/link';
-import { type LoginPayload, useLoginMutation } from '@/hooks/mutations/use-login-mutation';
+import { ValidationHttpError } from '@/errors/validation-http-error';
+import { useLoginMutation } from '@/hooks/mutations/use-login-mutation';
 
 export function Login(): ReactNode {
     const { mutateAsync: login } = useLoginMutation();
     const [formError, setFormError] = useState<HTTPError>();
 
-    const form = useForm<LoginPayload>({
+    const { form, setFormErrors } = useFormControls({
         defaultValues: {
             username: '',
             password: '',
@@ -23,7 +25,9 @@ export function Login(): ReactNode {
         try {
             await login(values);
         } catch (error) {
-            if (error instanceof HTTPError) {
+            if (error instanceof ValidationHttpError) {
+                setFormErrors(error);
+            } else if (error instanceof HTTPError) {
                 setFormError(error);
                 return;
             }
@@ -39,8 +43,8 @@ export function Login(): ReactNode {
                     <HomeIcon className="size-8" />
                 </Link>
                 <div className="flex flex-col gap-2 items-center">
-                    <h1 className="text-4xl font-bold">Welcome back!</h1>
-                    <p>Please enter your details</p>
+                    <h1 className="text-3xl font-bold">Welcome back!</h1>
+                    <p className="text-gray-500">Please enter your details to login to your account.</p>
                 </div>
             </header>
             {formError && <AlertFromError error={formError} />}
