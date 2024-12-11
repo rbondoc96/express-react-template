@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import { Router } from 'express';
 import { DateTime } from 'luxon';
 import { object, string } from 'zod';
-import { userCreate, userFindByUsername, userUpdate } from '@/database/repositories/user-repository';
+import { userCreate, userFindByEmail, userUpdate } from '@/database/repositories/user-repository';
 import { BadRequestException } from '@/exceptions/bad-request-exception';
 import { NotAuthenticatedException } from '@/exceptions/not-authenticated-exception';
 import { ValidationException } from '@/exceptions/validation-exception';
@@ -11,8 +11,8 @@ import { UserResource } from '@/http/resources/user-resource';
 import { createJwt, JwtCookieMeta } from '@/utilities/auth';
 
 const loginPayload = object({
-    username: string().min(1, {
-        message: 'The username field is required.',
+    email: string().email().min(1, {
+        message: 'The email field is required.',
     }),
     password: string().min(1, {
         message: 'The password field is required.',
@@ -20,11 +20,13 @@ const loginPayload = object({
 });
 
 const registerPayload = object({
-    username: string({
-        message: 'The username field is required.',
-    }).min(1, {
-        message: 'The username field is required.',
-    }),
+    email: string({
+        message: 'The email field is required.',
+    })
+        .email()
+        .min(1, {
+            message: 'The email field is required.',
+        }),
     first_name: string({
         message: 'The first name field is required.',
     }).min(1, {
@@ -80,7 +82,7 @@ authController.post('/login', async (req, res, next) => {
     }
 
     const data = result.data;
-    const user = await userFindByUsername(data.username);
+    const user = await userFindByEmail(data.email);
 
     if (!user) {
         next(new BadRequestException('Invalid credentials.'));
@@ -114,13 +116,13 @@ authController.post('/register', async (req, res, next) => {
 
     const data = result.data;
 
-    if (await userFindByUsername(data.username)) {
-        next(new BadRequestException('A user with this username already exists.'));
+    if (await userFindByEmail(data.email)) {
+        next(new BadRequestException('A user with this email already exists.'));
         return;
     }
 
     const user = await userCreate({
-        username: data.username.trim().toLowerCase(),
+        email: data.email.trim().toLowerCase(),
         first_name: data.first_name.trim(),
         last_name: data.last_name.trim(),
         password: data.password.trim(),

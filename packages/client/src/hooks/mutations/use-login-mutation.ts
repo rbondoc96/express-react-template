@@ -6,7 +6,7 @@ import { unwrap } from '@/api/validators/utilities/unwrap';
 import { setMeQueryData } from '@/hooks/queries/use-me-query';
 
 export const loginPayloadSchema = object({
-    username: string(),
+    email: string(),
     password: string(),
 });
 

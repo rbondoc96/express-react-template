@@ -16,7 +16,7 @@ export function Register(): ReactNode {
 
     const { form, setFormErrors } = useFormControls({
         defaultValues: {
-            username: '',
+            email: '',
             first_name: '',
             last_name: '',
             password: '',
@@ -63,7 +63,7 @@ export function Register(): ReactNode {
                         />
                         <FormText control={form.control} label="Last Name" name="last_name" placeholder="Last name" />
                     </div>
-                    <FormText control={form.control} label="Username" name="username" placeholder="Username" />
+                    <FormText control={form.control} label="Email" name="email" placeholder="Enter your email" />
                     <FormPassword control={form.control} label="Password" name="password" placeholder="********" />
                     <FormPassword
                         control={form.control}

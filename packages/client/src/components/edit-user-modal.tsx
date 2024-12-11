@@ -22,10 +22,10 @@ export function EditUserModal({ open, user, onOpenChange }: EditUserModalProps):
 
     const { form, setFormErrors } = useFormControls<UserUpdatePayload>({
         defaultValues: {
+            email: user.email,
             first_name: user.first_name,
             last_name: user.last_name,
             role: user.role,
-            username: user.username,
         },
     });
 
@@ -72,7 +72,7 @@ export function EditUserModal({ open, user, onOpenChange }: EditUserModalProps):
                                     placeholder="Last name"
                                 />
                             </div>
-                            <FormText control={form.control} label="Username" name="username" placeholder="Username" />
+                            <FormText control={form.control} label="Username" name="email" placeholder="Email" />
                         </div>
                         <ModalFooter>
                             <Button loading={isPending} type="submit">

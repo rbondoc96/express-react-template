@@ -7,9 +7,9 @@ export class UserFactory extends Factory<UserSelect, UserCreate> {
 
     public definition(): UserCreate {
         return {
+            email: faker.internet.email(),
             first_name: faker.person.firstName(),
             last_name: faker.person.lastName(),
-            username: faker.internet.username(),
             password: faker.internet.password(),
         };
     }
@@ -24,8 +24,8 @@ export class UserFactory extends Factory<UserSelect, UserCreate> {
         return this;
     }
 
-    public username(username: string): this {
-        this.attributes.username = username;
+    public email(email: string): this {
+        this.attributes.email = email;
         return this;
     }
 

@@ -21,7 +21,7 @@ export function UserListItem({ user }: UserListItemProps): React.ReactNode {
                     <span>{`${user.first_name} ${user.last_name}`}</span>
                 </div>
                 <span>{user.role}</span>
-                <span>{user.username}</span>
+                <span>{user.email}</span>
                 <span>{user.last_signed_in_at?.toFormat('MMM dd, yyyy')}</span>
                 <span>{user.created_at.toFormat('MMM dd, yyyy')}</span>
             </div>

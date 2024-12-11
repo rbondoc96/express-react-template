@@ -6,7 +6,7 @@ import { unwrap } from '@/api/validators/utilities/unwrap';
 import { setMeQueryData } from '@/hooks/queries/use-me-query';
 
 export const registerPayloadSchema = object({
-    username: string(),
+    email: string(),
     first_name: string(),
     last_name: string(),
     password: string(),

@@ -5,7 +5,7 @@ export async function up(db: Kysely<any>): Promise<void> {
         .createTable('users')
         .addColumn('id', 'serial', (column) => column.primaryKey())
         .addColumn('ulid', 'varchar', (column) => column.unique().notNull())
-        .addColumn('username', 'varchar', (column) => column.unique().notNull())
+        .addColumn('email', 'varchar', (column) => column.unique().notNull())
         .addColumn('first_name', 'varchar', (column) => column.notNull())
         .addColumn('last_name', 'varchar', (column) => column.notNull())
         .addColumn('password', 'varchar', (column) => column.notNull())

@@ -16,7 +16,7 @@ export function Login(): ReactNode {
 
     const { form, setFormErrors } = useFormControls({
         defaultValues: {
-            username: '',
+            email: '',
             password: '',
         },
     });
@@ -50,8 +50,13 @@ export function Login(): ReactNode {
             {formError && <AlertFromError error={formError} />}
             <FormProvider {...form}>
                 <form onSubmit={onLogin} className="flex flex-col gap-4">
-                    <FormText control={form.control} label="Username" name="username" placeholder="Username" />
-                    <FormPassword control={form.control} label="Password" name="password" placeholder="Password" />
+                    <FormText control={form.control} label="Email" name="email" placeholder="Enter your email" />
+                    <FormPassword
+                        control={form.control}
+                        label="Password"
+                        name="password"
+                        placeholder="Enter your password"
+                    />
                     <Button type="submit">Sign In</Button>
                 </form>
             </FormProvider>

@@ -9,7 +9,7 @@ import { roles } from '@/rbac/roles';
 export type UserTable = {
     id: ColumnType<number, never, never>;
     ulid: ColumnType<string, string | undefined, never>;
-    username: string;
+    email: string;
     first_name: string;
     last_name: string;
     password: string;
@@ -52,12 +52,12 @@ export async function userDelete(ulid: string): Promise<void> {
     await db.deleteFrom('users').where('ulid', '=', ulid).execute();
 }
 
-export async function userFindByUsername(username: string): Promise<UserSelect | undefined> {
-    return userSelectQuery().selectAll().where('username', '=', username).executeTakeFirst();
+export async function userFindByEmail(email: string): Promise<UserSelect | undefined> {
+    return userSelectQuery().selectAll().where('email', '=', email).executeTakeFirst();
 }
 
-export async function userFindByUsernameOrThrow(username: string): Promise<UserSelect> {
-    return userSelectQuery().selectAll().where('username', '=', username).executeTakeFirstOrThrow();
+export async function userFindByEmailOrThrow(email: string): Promise<UserSelect> {
+    return userSelectQuery().selectAll().where('email', '=', email).executeTakeFirstOrThrow();
 }
 
 export async function userFindByUlid(ulid: string): Promise<UserSelect | undefined> {

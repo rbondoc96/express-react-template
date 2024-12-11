@@ -6,10 +6,10 @@ import { unwrap } from '@/api/validators/utilities/unwrap';
 import { useInvalidateUserListQueries } from '@/hooks/queries/use-user-list-query';
 
 export type UserUpdatePayload = Partial<{
+    email: string;
     first_name: string;
     last_name: string;
     role: Role;
-    username: string;
 }>;
 
 type UserUpdateArguments = {

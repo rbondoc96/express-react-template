@@ -5,6 +5,7 @@ import { dateStringToDateTime, nullableStringToDateTime } from '@/api/validators
 
 export const userValidator = object({
     created_at: dateStringToDateTime(),
+    email: string(),
     first_name: string(),
     id: string(),
     last_name: string(),
@@ -12,7 +13,6 @@ export const userValidator = object({
     role: nativeEnum(Role),
     permissions: array(nativeEnum(Permission)),
     updated_at: dateStringToDateTime(),
-    username: string(),
 });
 
 export type User = output<typeof userValidator>;

@@ -11,7 +11,7 @@ describe('login', () => {
 
         // Act
         const response = await request.postJson('/api/auth/login', {
-            username: user.username,
+            email: user.email,
             password: '#Password1234',
         });
 
@@ -35,7 +35,7 @@ describe('login', () => {
 
         // Act
         const response = await request.postJson('/api/auth/login', {
-            username: 'user',
+            email: 'user@example.com',
             password: '#Password1234',
         });
 
@@ -51,7 +51,7 @@ describe('login', () => {
 
         // Act
         const response = await request.postJson('/api/auth/login', {
-            username: user.username,
+            email: user.email,
             password: 'wrong_password',
         });
 

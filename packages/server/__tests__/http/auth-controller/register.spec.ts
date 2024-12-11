@@ -10,10 +10,11 @@ describe('register', () => {
 
         // Act
         const response = await request.postJson('/api/auth/register', {
+            email: 'user@example.com',
             first_name: 'Test',
             last_name: 'User',
-            username: 'user',
             password: '#Password1234',
+            password_confirmation: '#Password1234',
         });
 
         // Assert
@@ -23,43 +24,44 @@ describe('register', () => {
         expect(response.header('set-cookie')?.[0]).toContain('jwt=');
     });
 
-    test('register with existing username', async () => {
+    test('register with existing email', async () => {
         // Arrange
         const request = new TestRequest(server);
         const user = await new UserFactory().password('#Password1234').create();
 
         // Act
         const response = await request.postJson('/api/auth/register', {
+            email: user.email,
             first_name: 'Test',
             last_name: 'User',
-            username: user.username,
             password: '#Password1234',
+            password_confirmation: '#Password1234',
         });
 
         // Assert
         response.assertBadRequest();
-        response.assertJsonError('A user with this username already exists.');
+        response.assertJsonError('A user with this email already exists.');
     });
 
     test.each([
         [
             'first name',
-            { last_name: 'User', username: 'user', password: 'password' },
+            { email: 'user@example.com', last_name: 'User', password: 'password', password_confirmation: 'password' },
             { first_name: 'The first name field is required.' },
         ],
         [
             'last name',
-            { first_name: 'User', username: 'user', password: 'password' },
+            { email: 'user@example.com', first_name: 'User', password: 'password', password_confirmation: 'password' },
             { last_name: 'The last name field is required.' },
         ],
         [
-            'username',
-            { first_name: 'Test', last_name: 'User', password: 'password' },
-            { username: 'The username field is required.' },
+            'email',
+            { first_name: 'Test', last_name: 'User', password: 'password', password_confirmation: 'password' },
+            { email: 'The email field is required.' },
         ],
         [
-            'username',
-            { first_name: 'Test', last_name: 'User', username: 'username' },
+            'email',
+            { email: 'user@example.com', first_name: 'Test', last_name: 'User' },
             { password: 'The password field is required.' },
         ],
     ])('register validation without %s', async (_, body, errors) => {

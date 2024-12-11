@@ -21,7 +21,7 @@ export function AdminUsers(): React.ReactNode {
                 <div className="grid grid-cols-5 px-4 py-2 text-sm bg-gray-100 rounded mb-2">
                     <span>Name</span>
                     <span>Role</span>
-                    <span>Username</span>
+                    <span>Email</span>
                     <span>Last Logged In</span>
                     <span>Account Created</span>
                 </div>
