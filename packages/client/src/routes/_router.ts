@@ -4,6 +4,7 @@ import { AppLayout } from '@/routes/_layouts/app-layout';
 import { AuthLayout } from '@/routes/_layouts/auth-layout';
 import {
     ROUTE_ADMIN_DASHBOARD,
+    ROUTE_ADMIN_SETTINGS,
     ROUTE_ADMIN_USERS,
     ROUTE_DASHBOARD,
     ROUTE_LOGIN,
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
             {
                 path: ROUTE_ADMIN_USERS.path,
                 Component: AdminUsers,
+            },
+            {
+                path: ROUTE_ADMIN_SETTINGS.path,
+                Component: Settings,
             },
         ],
     },

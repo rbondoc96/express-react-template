@@ -51,7 +51,7 @@ export function AdminSidebar(): React.ReactNode {
                     </SidebarMenuItem>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link to="/settings">
+                            <Link to="/admin/settings">
                                 <Settings />
                                 <span>Settings</span>
                             </Link>
