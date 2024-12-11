@@ -6,6 +6,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': resolve(__dirname, 'src'),
+            '@common': resolve(__dirname, '..', 'common', 'src'),
             '@mocks': resolve(__dirname, '__mocks__'),
             '@tests': resolve(__dirname, '__tests__'),
         },
