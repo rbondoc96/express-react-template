@@ -17,6 +17,7 @@
         "kysely": "kysely",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
+        "migrate:down": "kysely migrate:down",
         "migrate:up": "kysely migrate:up",
         "start": "node dist/server/src/server.js",
         "stan": "tsc --noEmit --skipLibCheck",
