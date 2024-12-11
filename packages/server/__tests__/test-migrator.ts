@@ -1,6 +1,6 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Kysely, Migrator, PostgresDialect } from 'kysely';
+import { Kysely, Migrator, NO_MIGRATIONS, PostgresDialect } from 'kysely';
 import pg from 'pg';
 import { FileMigrationProvider } from '@tests/file-migration-provider';
 import { config } from '@/config';
@@ -61,7 +61,7 @@ export class TestMigrator {
 
     public async killDatabase(): Promise<void> {
         if (this.didMigrate) {
-            await this.migrator.migrateDown();
+            await this.migrator.migrateTo(NO_MIGRATIONS);
         }
     }
 }
