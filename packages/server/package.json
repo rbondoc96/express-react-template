@@ -17,8 +17,11 @@
         "kysely": "kysely",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
+        "migrate": "kysely migrate",
         "migrate:down": "kysely migrate:down",
-        "migrate:up": "kysely migrate:up",
+        "migrate:fresh": "kysely migrate:rollback && kysely migrate",
+        "migrate:status": "kysely migrate:list",
+        "migrate:up": "kysely migrate:latest",
         "start": "node dist/server/src/server.js",
         "stan": "tsc --noEmit --skipLibCheck",
         "test": "vitest --run"
